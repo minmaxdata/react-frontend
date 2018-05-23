@@ -8,10 +8,9 @@ class Posts extends React.Component {
       return (
         <ol className='posts'>
         {
-          Object.keys(this.props.posts).map(post => {
+          Object.keys(this.props.posts).map(post => (
             <Post key={post} items={this.props.posts[post]} />
-            //console.log(this.props.posts[post]['id'])
-          })
+            ))
         }
         </ol>
       )

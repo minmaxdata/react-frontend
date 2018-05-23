@@ -6,7 +6,7 @@ class Post extends React.Component {
       console.log('Post Props', this.props)
       return (
         <li className='post'>
-            hello post
+            {this.props.items.title}
         </li>
       )
     }
