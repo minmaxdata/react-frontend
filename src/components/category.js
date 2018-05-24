@@ -6,7 +6,7 @@ class Category extends React.Component {
       console.log('category Props', this.props)
       return (
         <li className='category'>
-          {this.props.category.name}
+          <a onClick={() => this.props.sortPostsByCategory(this.props.category.path)}>{this.props.category.name}</a>
         </li>
       )
     }

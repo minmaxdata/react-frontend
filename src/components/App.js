@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom'
+import Modal from 'react-modal'
+import Loading from 'react-loading'
+
 import Categories from './Categories'
 import Posts from './Posts'
-import '../App.css';
 
 const categories = [{
   name: 'react',
@@ -43,14 +46,32 @@ const posts = {
 
 class App extends Component {
   state = {
+      posts: posts,
+      categories: categories,
+  }
 
+  componentDidMount() {
+    this.setState({ categories })
+    this.setState({ posts })
+  }
+
+  sortPostsByCategory(category) {
+    console.log('sortPostsByCategory ', category);
   }
 
   render() {
     return (
-      <div className="App">
-        <Categories categories = {categories}/>
-        <Posts posts = {posts}/>
+      <div className="container">
+        <div className='nav'>
+           <h3 className='header'>Readable Posts Comments and Voting</h3>
+           <button
+             className='' onClick=''>
+               Add Post
+           </button>
+         </div>
+
+          <Categories categories = {this.state.categories} sorted ='sortPostsByCategory' />
+          <Posts posts = {this.state.posts}/>
       </div>
     );
   }

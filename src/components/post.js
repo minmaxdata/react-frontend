@@ -6,7 +6,10 @@ class Post extends React.Component {
       console.log('Post Props', this.props)
       return (
         <li className='post'>
+          <div>
             {this.props.items.title}
+          </div>
+            <div> edit icon, vote icon, detele icon </div>
         </li>
       )
     }
