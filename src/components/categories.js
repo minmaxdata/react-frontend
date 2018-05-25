@@ -6,11 +6,11 @@ class Categories extends React.Component {
   render() {
       console.log('Categories Props', this.props)
       return (
-        <ol className='categories'>
+        <ul className='categories'>
           {this.props.categories.map((category) => (
-            <Category key = {category.name} category={category} />
+            <Category key = {category.name} category={category} onSortByCategory={this.props.sortPosts}/>
           ))}
-        </ol>
+        </ul>
       )
     }
 
