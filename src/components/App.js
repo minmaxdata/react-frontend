@@ -5,6 +5,7 @@ import Loading from 'react-loading'
 
 import Categories from './Categories'
 import Posts from './Posts'
+import CreatePost from './CreatePost'
 
 
 const posts = {
@@ -67,6 +68,7 @@ const posts = {
 
 class App extends Component {
   state = {
+    sortBy: 'all',
     categories: [{
       name: 'react',
       path: 'react'
@@ -84,6 +86,7 @@ class App extends Component {
 
   sortPostsByCategory = (category) => {
     console.log('sortPostsByCategory ', category);
+    //postsByCategory[category].items.map((post) => {})
   }
   sortPostsByDeleted = () => {
     console.log('sortPostsByDeleted ');
@@ -103,26 +106,26 @@ class App extends Component {
 
   }
   componentDidMount() {
-    //filter out deleted posts
-    //set up routing
-
+    //filter out deleted posts and sort by category
     this.setState({ categories: this.state.categories })
     this.setState({ posts: posts })
   }
-
+  componentWillReceiveProps(nextProps) {
+      console.log('componentWillReceiveProps', nextProps)
+  }
   render() {
     return (
       <div className="container">
         <div className='nav'>
            <h3 className='header'>Readable Posts Comments and Voting</h3>
-           <button
-             className='' onClick={this.addPost}>
-               Add Post
-           </button>
-         </div>
-
-          <Categories categories = {this.state.categories} sortPosts ={this.sortPostsByCategory} />
-          <Posts posts = {this.state.posts} onDeletePost ={this.deletePost}/>
+        </div>
+        <Route exact path='/' render={(props) => (
+          <div>
+            <Categories {...props} categories = {this.state.categories} sortPosts ={this.sortPostsByCategory} />
+            <Posts {...props} posts = {this.state.posts} onDeletePost ={this.deletePost}/>
+          </div>
+        )}/>
+        <Route path='/create' component={CreatePost}/>
       </div>
     );
   }
