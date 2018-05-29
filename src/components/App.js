@@ -118,14 +118,19 @@ class App extends Component {
       <div className="container">
         <div className='nav'>
            <h3 className='header'>Readable Posts Comments and Voting</h3>
+           <Route path='/create' component={CreatePost}/>
+
+           <Route path='/' render={(props) => (
+             <Categories {...props}  categories = {this.state.categories} />
+           )}/>
         </div>
-        <Route exact path='/' render={(props) => (
-          <div>
-            <Categories {...props} categories = {this.state.categories} sortPosts ={this.sortPostsByCategory} />
-            <Posts {...props} posts = {this.state.posts} onDeletePost ={this.deletePost}/>
-          </div>
-        )}/>
-        <Route path='/create' component={CreatePost}/>
+        <div>
+            <Route exact path='/' render={(props) => (
+              <Posts {...props} posts = {this.state.posts} onDeletePost ={this.deletePost}/>
+          )}/>
+
+        </div>
+
       </div>
     );
   }
