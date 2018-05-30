@@ -8,7 +8,7 @@ import Posts from './Posts'
 import CreatePost from './CreatePost'
 
 
-const posts = {
+const initialPosts = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
@@ -88,9 +88,9 @@ class App extends Component {
     console.log('sortPostsByCategory ', category);
     this.setState({sortBy: category})
     const newObj = {};
-    Object.keys(this.state.posts).map((post) => {
-      if(this.state.posts[post]['category'] === category) {
-        newObj[post] = this.state.posts[post]
+    Object.keys(initialPosts).map((post) => {
+      if(initialPosts[post]['category'] === category) {
+        newObj[post] = initialPosts[post]
       }
     })
     console.log('newObj', newObj)
@@ -117,7 +117,7 @@ class App extends Component {
   componentDidMount() {
     //filter out deleted posts and sort by category
     this.setState({ categories: this.state.categories })
-    this.setState({ posts: posts })
+    this.setState({ posts: initialPosts })
   }
   componentWillReceiveProps(nextProps) {
       console.log('componentWillReceiveProps', nextProps)
@@ -131,7 +131,7 @@ class App extends Component {
            <Route path='/create' component={CreatePost}/>
            <div>{this.state.sortBy}</div>
            <Route path='/' render={(props) => (
-             <Categories {...{posts}}  categories = {this.state.categories}  onSortPostsByCategory = {this.sortPostsByCategory}/>
+             <Categories  categories = {this.state.categories}  onSortPostsByCategory = {this.sortPostsByCategory}/>
            )}/>
         </div>
         <div>
