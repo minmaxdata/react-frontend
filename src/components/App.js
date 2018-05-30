@@ -86,7 +86,16 @@ class App extends Component {
 
   sortPostsByCategory = (category) => {
     console.log('sortPostsByCategory ', category);
-    //postsByCategory[category].items.map((post) => {})
+    this.setState({sortBy: category})
+    const newObj = {};
+    Object.keys(this.state.posts).map((post) => {
+      if(this.state.posts[post]['category'] === category) {
+        newObj[post] = this.state.posts[post]
+      }
+    })
+    console.log('newObj', newObj)
+    this.setState({posts: newObj})
+
   }
   sortPostsByDeleted = () => {
     console.log('sortPostsByDeleted ');
@@ -118,10 +127,11 @@ class App extends Component {
       <div className="container">
         <div className='nav'>
            <h3 className='header'>Readable Posts Comments and Voting</h3>
-           <Route path='/create' component={CreatePost}/>
 
+           <Route path='/create' component={CreatePost}/>
+           <div>{this.state.sortBy}</div>
            <Route path='/' render={(props) => (
-             <Categories {...props}  categories = {this.state.categories} />
+             <Categories {...{posts}}  categories = {this.state.categories}  onSortPostsByCategory = {this.sortPostsByCategory}/>
            )}/>
         </div>
         <div>

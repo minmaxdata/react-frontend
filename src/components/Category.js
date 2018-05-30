@@ -3,12 +3,20 @@ import {
   Link
 } from 'react-router-dom';
 
+
 class Category extends React.Component {
+
+updateSelectedCategory = () => {
+  console.log('updateSelectedCategory ', this.props.category.name);
+  this.props.sortBy(this.props.category.name);
+}
   render() {
-      console.log('category Props', this.props)
+    //console.log('props ', this.props);
       return (
         <li className='category'>
-          <Link to={this.props.category.path}>{this.props.category.name}</Link>
+          <button  onClick={this.updateSelectedCategory} >
+          {this.props.category.name}
+          </button>
         </li>
       )
     }
