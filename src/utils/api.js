@@ -14,9 +14,17 @@ export function getCategories () {
   return fetch(`${api}/categories`, { headers })
     .then((res) => res.json())
     .catch(function() {
-    console.log('error');
-});
-    }
+      console.log('error');
+  });
+}
+export function getPosts () {
+  return fetch(`${api}/posts`, { headers })
+    .then((res) => res.json())
+    .catch(function() {
+      console.log('error');
+  });
+}
+
   // This method retrieves the list of posts (by category if not empty).
   // export const loadPosts = (category = '') => {
   // const url = XXXXXXXXX;

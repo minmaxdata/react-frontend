@@ -9,7 +9,7 @@ const defaultData = {
     title: 'Udacity is the best place to learn React',
     body: 'Everyone says so after all.',
     author: 'thingtwo',
-    category: 'react',
+    category: 'udacity',
     voteScore: 6,
     deleted: false,
     commentCount: 2
@@ -17,14 +17,47 @@ const defaultData = {
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
-    title: 'Learn Redux in 10 minutes!',
+    title: 'Learn React in 10 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'react',
+    voteScore: -5,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni0123ym7mf1p33lnez": {
+    id: '6ni0123ym7mf1p33lnez',
+    timestamp: 1468479767190,
+    title: 'Learn Redux in 20 minutes!',
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
     deleted: false,
     commentCount: 0
-  }
+  },
+  "6ni456ym7mf1p33lnez": {
+    id: '6ni456ym7mf1p33lnez',
+    timestamp: 1468479767190,
+    title: 'Learn React in 30 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'react',
+    voteScore: -5,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni7893ym7mf1p33lnez": {
+    id: '6ni7893ym7mf1p33lnez',
+    timestamp: 1468479767190,
+    title: 'Learn Redux in 40 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: -5,
+    deleted: false,
+    commentCount: 0
+  },
 }
 
 function getData (token) {
