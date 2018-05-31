@@ -1,30 +1,25 @@
 import React, { Component } from 'react';
 import {
-  withRouter
+  Link
 } from 'react-router-dom';
 
 
 class Category extends React.Component {
-//
-// updateSelectedCategory = () => {
-//   console.log('updateSelectedCategory ', this.props.category.name);
-//   this.props.sortBy(this.props.category.name);
-//   this.props.history.push("/" + this.props.category.path);
-// }
+
+updateSelectedCategory = () => {
+  console.log('updateSelectedCategory ', this.props.category.name);
+  this.props.sortBy(this.props.category.name);
+}
   render() {
     console.log('props ', this.props);
-    const name = this.props.name;
-    const path = this.props.path;
-
       return (
         <li className='category'>
-        <button >
-        {name}
-        </button>
-
+          <button  onClick={this.updateSelectedCategory} >
+          {this.props.category.name}
+          </button>
         </li>
       )
     }
 
 }
-export default withRouter(Category)
+export default Category

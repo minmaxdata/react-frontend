@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Route
 } from 'react-router-dom';
+import * as ReadableAPI from "../utils/api";
 import Category from './Category'
 
 const initialCategories = [
@@ -25,15 +26,25 @@ class Categories extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ categories: initialCategories})
+
+    ReadableAPI.getCategories().then(response => {
+      console.log(' categories', response['categories']);
+      this.setState({ categories: response['categories']})
+    });
+
   }
+
 
 
   render() {
       return (
         <div>
           <ul className='categories'>
-          Hello Categories
+          {this.state.categories.map((category) => (
+
+              <Category key = {category.name} category={category} sortBy={this.state.onSortPostsByCategory}/>
+
+            ))}
 
           </ul>
 
