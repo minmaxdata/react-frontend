@@ -13,5 +13,22 @@ const headers = {
 export function getCategories () {
   return fetch(`${api}/categories`, { headers })
     .then((res) => res.json())
-    //.then(({ categories }) => categories.map(({ category}) => category))
+    .catch(XXXXXX);
+    }
+  // This method retrieves the list of posts (by category if not empty).
+  export const loadPosts = (category = '') => {
+  const url = XXXXXXXXX;
+
+  return fetch(url, HEADERS)
+      .then(XXXXXXXX)
+      .catch(XXXXXX);
+  }
+
+  // This method retrieved the list of categories.
+  export const loadCategories = () => {
+  const url = XXXXXXX;
+
+  return fetch(url, HEADERS)
+      .then(XXXXXXXX)
+      .catch(XXXXXX);
   }

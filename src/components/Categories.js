@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
+import {
+  Route
+} from 'react-router-dom';
 import Category from './Category'
 
+const initialCategories = [
+  {
+  name: 'react',
+  path: 'react'
+},
+{
+  name: 'redux',
+  path: 'redux'
+},
+{
+  name: 'udacity',
+  path: 'udacity'
+}]
+
 class Categories extends React.Component {
+  state = {
+    sortBy: 'all',
+    categories: [],
+  }
+
+  componentDidMount() {
+    this.setState({ categories: initialCategories})
+  }
 
 
   render() {
-    console.log('Categories Props', this.props)
       return (
         <div>
           <ul className='categories'>
-            {this.props.categories.map((category) => (
+          Hello Categories
 
-              <Category key = {category.name} category={category} sortBy={this.props.onSortPostsByCategory}/>
-
-            ))}
           </ul>
+
           </div>
       )
     }
