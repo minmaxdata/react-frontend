@@ -5,19 +5,6 @@ import {
 import * as ReadableAPI from "../utils/api";
 import Category from './Category'
 
-const initialCategories = [
-  {
-  name: 'react',
-  path: 'react'
-},
-{
-  name: 'redux',
-  path: 'redux'
-},
-{
-  name: 'udacity',
-  path: 'udacity'
-}]
 
 class Categories extends React.Component {
   state = {
@@ -42,7 +29,7 @@ class Categories extends React.Component {
           <ul className='categories'>
           {this.state.categories.map((category) => (
 
-              <Category key = {category.name} category={category} sortBy={this.state.onSortPostsByCategory}/>
+              <Category key = {category.name} category={category} sortBy={this.props.onSortPostsByCategory}/>
 
             ))}
 

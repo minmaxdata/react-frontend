@@ -3,7 +3,7 @@ import * as FontAwesome from 'react-icons/lib/fa'
 
 class Post extends React.Component {
   render() {
-    console.log('Post ', this.props)
+    //console.log('Post ', this.props)
       return (
         <li className='post'>
               <div>
