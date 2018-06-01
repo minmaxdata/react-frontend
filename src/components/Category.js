@@ -2,21 +2,18 @@ import React, { Component } from 'react';
 import {
   Link
 } from 'react-router-dom';
-
+import { capitalize } from '../utils/helpers'
 
 class Category extends React.Component {
-
-updateSelectedCategory = () => {
-  console.log('updateSelectedCategory ', this.props.category.name);
-  this.props.sortBy(this.props.category.name);
-}
-  render() {
+    render() {
     console.log('props ', this.props);
+    const category =  capitalize(`${this.props.category.name}`)
       return (
         <li className='category'>
-          <button  onClick={this.updateSelectedCategory} >
-          {this.props.category.name}
-          </button>
+          <Link exact to={this.props.category.path}>
+
+          {category} Posts
+          </Link>
         </li>
       )
     }

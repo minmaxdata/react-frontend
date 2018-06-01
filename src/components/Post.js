@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
+import { Link , Redirect } from 'react-router-dom'
 import * as FontAwesome from 'react-icons/lib/fa'
+import * as ReadableAPI from "../utils/api";
+
 
 class Post extends React.Component {
+state = {
+  redirect: false
+}
+  handleDelete = () => {
+    const id = this.props.post.id
+    ReadableAPI.deletePost(id).then(response => {
+       this.setState({redirect : true})
+    });
+  }
   render() {
-    //console.log('Post ', this.props)
+    if(this.state.redirect) {
+    return <Redirect to='/' />
+  }
       return (
         <li className='post'>
               <div>
@@ -11,7 +25,7 @@ class Post extends React.Component {
               </div>
               <div>
                   <button><FontAwesome.FaEdit /></button>
-                  <button onClick={() => this.props.onDeletePost(this.props.post.id)} ><FontAwesome.FaTimesCircle /></button>
+                  <button onClick={() => this.handleDelete()}><FontAwesome.FaTimesCircle /></button>
               </div>
           </li>
       )

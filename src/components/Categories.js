@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Route
+  Route, Link
 } from 'react-router-dom';
 import * as ReadableAPI from "../utils/api";
 import Category from './Category'
@@ -8,7 +8,7 @@ import Category from './Category'
 
 class Categories extends React.Component {
   state = {
-    sortBy: 'all',
+    sortBy: 'All',
     categories: [],
   }
 
@@ -27,9 +27,11 @@ class Categories extends React.Component {
       return (
         <div>
           <ul className='categories'>
+            <li> <Link to='/create'>Add a Post</Link></li>
+            <li> <Link to='/'>All Posts</Link></li>
           {this.state.categories.map((category) => (
 
-              <Category key = {category.name} category={category} sortBy={this.props.onSortPostsByCategory}/>
+              <Category key = {category.name} category={category} />
 
             ))}
 

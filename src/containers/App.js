@@ -9,7 +9,7 @@ import CreatePost from '../components/CreatePost'
 
 class App extends Component {
   state = {
-    sortBy: 'all',
+    sortBy: 'All',
   }
 
 
@@ -19,10 +19,10 @@ class App extends Component {
         <div className='nav'>
            <h3 className='header'>Readable Posts Comments and Voting</h3>
            <Categories />
+
        </div>
        <div>
          <Route exact path='/create' component={CreatePost}/>
-         <div>{this.state.sortBy}</div>
          <Route exact path='/' component={Posts}/>
         </div>
       </div>

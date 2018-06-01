@@ -25,20 +25,30 @@ export function getPosts () {
   });
 }
 
-  // This method retrieves the list of posts (by category if not empty).
-  // export const loadPosts = (category = '') => {
-  // const url = XXXXXXXXX;
-  //
-  // return fetch(url, HEADERS)
-  //     .then(XXXXXXXX)
-  //     .catch(XXXXXX);
-  // }
-  //
-  // // This method retrieved the list of categories.
-  // export const loadCategories = () => {
-  // const url = XXXXXXX;
-  //
-  // return fetch(url, HEADERS)
-  //     .then(XXXXXXXX)
-  //     .catch(XXXXXX);
-  // }
+export const addPost = data =>
+   fetch (`${api}/posts`,
+    { method: 'post',
+    headers: {
+     ...headers,
+      "Content-Type": "application/json"
+    },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .catch(function () {
+        console.log('error state')
+      });
+
+export const deletePost = id =>
+    fetch (`${api}/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+       ...headers,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(id)
+    })
+      .then(res => res.json())
+      .catch(function () {
+        console.log('error state')
+      });
