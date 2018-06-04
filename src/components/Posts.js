@@ -1,34 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import * as ReadableAPI from "../utils/api";
-import Post from './Post'
-
+import Post from "./Post";
 
 class Posts extends React.Component {
   state = {
-    sortBy: 'all',
-    posts: [],
-  }
-
+    sortBy: "all",
+    posts: []
+  };
 
   componentDidMount() {
-
-    ReadableAPI.getPosts().then(response => {
-      this.setState({ posts: response})
-    });
-
+    ReadableAPI.getPosts()
+      .then(response => {
+        this.setState({ posts: response });
+      })
+      .catch(reason => console.error(reason));
   }
 
   render() {
-      return (
-        <ul className=''>
-        {  this.state.posts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))
-
-        }
-        </ul>
-      )
-    }
-
+    return (
+      <ul className="">
+        {this.state.posts.map(post => <Post key={post.id} post={post} />)}
+      </ul>
+    );
+  }
 }
-export default Posts
+export default Posts;
