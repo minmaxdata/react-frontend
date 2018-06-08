@@ -12,32 +12,85 @@ const headers = {
 };
 
 export const getCategories = async () => {
-    let response = await fetch(`${api}/categories`, { headers });
-    let json = await response.json();
-    return json
-}
+  let response = await fetch(`${api}/categories`, { headers });
+  let json = await response.json();
+  return json;
+};
 
-export const getPosts = async() => {
+export const getPosts = async () => {
+  let request = new Request(`${api}/posts`, { headers: headers });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
 
-    let request = new Request(`${api}/posts`, {headers: headers})
-    let response = await fetch(request)
-    let json = await response.json();
-    return json;
+export const getPostById = async (id) => {
+  let request = new Request(`${api}/posts/${id}`, { headers: headers });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
 
-}
+export const getComments = async (id) => {
+  let request = new Request(`${api}/posts/${id}/comments`, {
+    headers: headers
+  });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
+export const getComment = async (id) => {
+  let request = new Request(`${api}/comments/${id}`, { headers: headers });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
 
-export const getPostById = async(id) => {
+export const deleteComment = async (id) => {
+  let request = new Request(`${api}/comments/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(id)
+  });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
 
-    let request = new Request(`${api}/posts/${id}`, {headers: headers})
-    let response = await fetch(request)
-    let json = await response.json();
-    return json;
+export const addComment = async (data) => {
+  let request = new Request(`${api}/comments`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
 
-}
+export const editComment = async (data) => {
+  let request = new Request(`${api}/comments/${data.id}`, {
+    method: "PUT",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
 
 export const addPost = data =>
   fetch(`${api}/posts`, {
-    method: "post",
+    method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json"

@@ -18,9 +18,14 @@ class Posts extends React.Component {
 
   render() {
     return (
-      <ul className="">
-        {this.state.posts.map(post => <Post key={post.id} post={post} />)}
-      </ul>
+      <div>
+        <ul className="">
+          <li className='post'><div>Title</div><div>Votes</div></li>
+        </ul>
+        <ul className="">
+          {this.state.posts.map(post => <Post key={post.id} post={post} />)}
+        </ul>
+      </div>
     );
   }
 }

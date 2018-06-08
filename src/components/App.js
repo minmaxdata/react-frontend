@@ -10,7 +10,8 @@ class App extends Component {
     return (
       <div className="container">
         <div className="nav">
-          <h3 className="header">Readable Posts Comments and Voting</h3>
+          <h3 className="header">Readable</h3>
+          <h4> Posts Comments and Voting</h4>
           <Categories />
         </div>
         <Switch>

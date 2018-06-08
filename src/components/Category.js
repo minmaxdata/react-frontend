@@ -4,7 +4,7 @@ import { capitalize } from "../utils/helpers";
 
 class Category extends React.Component {
   render() {
-    console.log("props ", this.props);
+    //console.log("props ", this.props);
     const category = capitalize(`${this.props.category.name}`);
     return (
       <li className="category">
