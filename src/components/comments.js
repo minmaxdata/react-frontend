@@ -15,37 +15,67 @@ class Comments extends React.Component {
     this.setState(() => ({ showModal: true }));
   };
   handleCloseModal = () => {
+    this.getOrRefreshComments();
     this.setState(() => ({ showModal: false }));
   };
 
-  componentDidMount() {
-    console.log("comments props ", this.props.id);
+  deleteComment = id => {
+    ReadableAPI.deleteComment(id)
+      .then(response => {
+        console.log(" comments response ", response);
+        this.getOrRefreshComments();
+      })
+      .catch(reason => console.error(reason));
+  };
+
+  editComment = () => {
+    this.handleOpenModal();
+  };
+
+  getOrRefreshComments = () => {
+    //console.log("comments props ", this.props.id);
     let id = this.props.id;
+
     ReadableAPI.getComments(id)
       .then(response => {
         console.log(" comments response ", response);
         this.setState({ comments: response });
       })
       .catch(reason => console.error(reason));
+  };
+
+  componentDidMount() {
+    this.getOrRefreshComments();
   }
 
   render() {
     return (
       <div>
-        <div className="nav">
-          <h3>Comments</h3>
+        <div className="row">
+          <div className="col-md-3">
+            <h4>Comments</h4>
+          </div>
+          <div className="col-md-9">
+            <button onClick={this.handleOpenModal}>Add Comment</button>
+            <Modal isOpen={this.state.showModal} ariaHideApp={false}>
+              <CreateComment
+                parentId={this.props.id}
+                comment={false}
+                close={this.handleCloseModal}
+              />
+              <button onClick={this.handleCloseModal}>Close Modal</button>
+            </Modal>
+          </div>
         </div>
-        <button onClick={this.handleOpenModal}>Add Comment</button>
-        <Modal
-          isOpen={this.state.showModal}
-          contentLabel="Minimal Modal Example"
-        >
-          <CreateComment parentId ={this.props.id} />
-          <button onClick={this.handleCloseModal}>Close Modal</button>
-        </Modal>
-        <ul className="">
+        <ul>
           {this.state.comments.map(comment => (
-            <Comment key={comment.id} comment={comment} />
+            <Comment
+              key={comment.id}
+              comment={comment}
+              deleteComment={this.deleteComment}
+              editComment={this.editComment}
+              refresh={this.getOrRefreshComments}
+            />
           ))}
         </ul>
       </div>

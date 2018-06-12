@@ -1,63 +1,69 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import * as FontAwesome from "react-icons/lib/fa";
+import { withRouter, Link } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
 import Comments from "../components/Comments";
+import DeleteItem from "./DeleteItem";
+import EditItem from "./EditItem";
+import Vote from './Vote'
 
 class PostDetail extends Component {
   state = {
     post: [],
     redirect: false
   };
-  handleEdit = () => {
-    const id = this.state.post.id;
-    console.log("post id ", id);
-  };
 
-  handleDelete = () => {
-    const id = this.state.post.id;
-    ReadableAPI.deletePost(id).then(response => {
-      this.setState({ redirect: true });
-    });
-  };
-
-  componentDidMount() {
-    //const id = this.props.post.id;
-    console.log("props ", this.props.match.params.id);
-    let id = this.props.match.params.id;
+  getOrRefreshPost = id => {
     ReadableAPI.getPostById(id)
       .then(response => {
         this.setState({ post: response });
       })
       .catch(reason => console.error(reason));
-    console.log("props ", this.props.match.params.id);
+  };
+
+  updateRoute = () => {
+    console.log("update route props ", this.props);
+    this.props.history.push("/");
+  }
+  refreshPost = () => {
+    console.log('refresh post ', this.props)
+    let id = this.state.post.id
+    this.getOrRefreshPost(id)
+  }
+
+
+
+  componentDidMount() {
+    //const id = this.props.post.id;
+    console.log("post detail props ", this.props);
+    let id = this.props.match.params.id;
+    this.getOrRefreshPost(id);
   }
 
   render() {
     return (
       <div>
-        <div className="nav">
-          <h3>Post</h3>
-          <ul className="categories">
-            <li>
-              <button onClick={() => this.handleEdit()}>
-                <FontAwesome.FaEdit />
-              </button>
-            </li>
-            <li>
-              <button onClick={() => this.handleDelete()}>
-                <FontAwesome.FaTimesCircle />
-              </button>
-            </li>
-          </ul>
-        
-        </div>
+        <ul className="row">
+          <li className="col-md-8">
+            <h4>Post</h4>
+          </li>
+          <li className="col-md-2">
+          <p className="text-center">
+            <Vote type={'post'} itemId={this.state.post.id}  getPosts={this.refreshPost}/>
+          </p>
+          </li>
+          <li className="col-md-2">
+            <Link to={`/${this.state.post.category}/${this.state.post.id}/edit`}><EditItem /></Link>
+            <DeleteItem type={'post'} itemId={this.state.post.id}  getPosts={this.updateRoute}/>
+
+          </li>
+        </ul>
 
         <div>
           <div>Title: {this.state.post.title}</div>
           <div>Author: {this.state.post.author}</div>
           <div>Category: {this.state.post.category}</div>
           <div>Body: {this.state.post.body}</div>
+          <div>VoteScore: {this.state.post.voteScore}</div>
         </div>
         <div />
 

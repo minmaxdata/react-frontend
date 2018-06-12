@@ -15,9 +15,11 @@ class App extends Component {
           <Categories />
         </div>
         <Switch>
-          <Route path="/create" component={CreatePost} />
-          <Route exact path="/" component={Posts} />
-          <Route exact path="/:category" component={Posts} />
+          <Route exact path="/create" component={props => <CreatePost {...props} />} />
+          <Route exact path="/" component={props => <Posts {...props} />} />
+          <Route exact path="/:category" component={props => <Posts {...props} />} />
+          <Route exact path="/:category/:id" component={props => <PostDetail {...props} />} />
+          <Route path="/:category/:id/edit" component={props => <CreatePost {...props} />} />
         </Switch>
       </div>
     );

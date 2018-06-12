@@ -26,6 +26,13 @@ class CreatePost extends Component {
     });
   };
 
+    componentDidMount() {
+      //const id = this.props.post.id;
+      console.log("edit post  ", this.props);
+      let id = this.props.match.params.id;
+      //this.getOrRefreshPost(id);
+    }
+
   render() {
     return (
       <div>
