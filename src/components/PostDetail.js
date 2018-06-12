@@ -4,7 +4,7 @@ import * as ReadableAPI from "../utils/api";
 import Comments from "../components/Comments";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
-import Vote from './Vote'
+import Vote from "./Vote";
 
 class PostDetail extends Component {
   state = {
@@ -23,14 +23,12 @@ class PostDetail extends Component {
   updateRoute = () => {
     console.log("update route props ", this.props);
     this.props.history.push("/");
-  }
+  };
   refreshPost = () => {
-    console.log('refresh post ', this.props)
-    let id = this.state.post.id
-    this.getOrRefreshPost(id)
-  }
-
-
+    console.log("refresh post ", this.props);
+    let id = this.state.post.id;
+    this.getOrRefreshPost(id);
+  };
 
   componentDidMount() {
     //const id = this.props.post.id;
@@ -47,14 +45,25 @@ class PostDetail extends Component {
             <h4>Post</h4>
           </li>
           <li className="col-md-2">
-          <p className="text-center">
-            <Vote type={'post'} itemId={this.state.post.id}  getPosts={this.refreshPost}/>
-          </p>
+            <p className="text-center">
+              <Vote
+                type={"post"}
+                itemId={this.state.post.id}
+                getPosts={this.refreshPost}
+              />
+            </p>
           </li>
           <li className="col-md-2">
-            <Link to={`/${this.state.post.category}/${this.state.post.id}/edit`}><EditItem /></Link>
-            <DeleteItem type={'post'} itemId={this.state.post.id}  getPosts={this.updateRoute}/>
-
+            <Link
+              to={`/${this.state.post.category}/${this.state.post.id}/edit`}
+            >
+              <EditItem />
+            </Link>
+            <DeleteItem
+              type={"post"}
+              itemId={this.state.post.id}
+              getPosts={this.updateRoute}
+            />
           </li>
         </ul>
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route , Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Modal from "react-modal";
 import Loading from "react-loading";
 
@@ -21,14 +21,12 @@ class App extends Component {
           <Categories />
         </div>
         <div>
-        <Switch>
-          <Route path="/create" component={CreatePost} />
-          <Route exact path="/" component={Posts} />
-          <Route exact path="/:category/:id" component={PostDetail} />
-          <Route exact path="/:category" component={Posts} />
-        </Switch>
-
-
+          <Switch>
+            <Route path="/create" component={CreatePost} />
+            <Route exact path="/" component={Posts} />
+            <Route exact path="/:category/:id" component={PostDetail} />
+            <Route exact path="/:category" component={Posts} />
+          </Switch>
         </div>
       </div>
     );

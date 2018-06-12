@@ -24,14 +24,21 @@ export const getPosts = async () => {
   return json;
 };
 
-export const getPostById = async (id) => {
+export const getPostById = async id => {
   let request = new Request(`${api}/posts/${id}`, { headers: headers });
   let response = await fetch(request);
   let json = await response.json();
   return json;
 };
 
-export const getComments = async (id) => {
+export const getPostByCategory = async id => {
+  let request = new Request(`${api}/${id}/posts`, { headers: headers });
+  let response = await fetch(request);
+  let json = await response.json();
+  return json;
+};
+
+export const getComments = async id => {
   let request = new Request(`${api}/posts/${id}/comments`, {
     headers: headers
   });
@@ -40,14 +47,14 @@ export const getComments = async (id) => {
   return json;
 };
 
-export const getComment = async (id) => {
+export const getComment = async id => {
   let request = new Request(`${api}/comments/${id}`, { headers: headers });
   let response = await fetch(request);
   let json = await response.json();
   return json;
 };
 
-export const deleteComment = async (id) => {
+export const deleteComment = async id => {
   let request = new Request(`${api}/comments/${id}`, {
     method: "DELETE",
     headers: {
@@ -61,7 +68,7 @@ export const deleteComment = async (id) => {
   return json;
 };
 
-export const addComment = async (data) => {
+export const addComment = async data => {
   let request = new Request(`${api}/comments`, {
     method: "POST",
     headers: {
@@ -75,7 +82,7 @@ export const addComment = async (data) => {
   return json;
 };
 
-export const editComment = async (data) => {
+export const editComment = async data => {
   let request = new Request(`${api}/comments/${data.id}`, {
     method: "PUT",
     headers: {
@@ -89,35 +96,35 @@ export const editComment = async (data) => {
   return json;
 };
 
-export const voteComment = async (data) => {
+export const voteComment = async data => {
   let request = new Request(`${api}/comments/${data.id}`, {
     method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({'option':data.option})
+    body: JSON.stringify({ option: data.option })
   });
   let response = await fetch(request);
   let json = await response.json();
   return json;
-}
+};
 
-export const votePost = async (data) => {
+export const votePost = async data => {
   let request = new Request(`${api}/posts/${data.id}`, {
     method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({'option':data.option})
+    body: JSON.stringify({ option: data.option })
   });
   let response = await fetch(request);
   let json = await response.json();
   return json;
-}
+};
 
-export const editPost = async (data) => {
+export const editPost = async data => {
   let request = new Request(`${api}/posts/${data.id}`, {
     method: "PUT",
     headers: {
@@ -129,7 +136,7 @@ export const editPost = async (data) => {
   let response = await fetch(request);
   let json = await response.json();
   return json;
-}
+};
 
 export const addPost = data =>
   fetch(`${api}/posts`, {
