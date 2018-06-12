@@ -8,7 +8,7 @@ class Category extends React.Component {
     const category = capitalize(`${this.props.category.name}`);
     return (
       <li className="category">
-        <Link to={this.props.category.path}>
+        <Link to={`/${this.props.category.path}`}>
           {category} Posts
         </Link>
       </li>
