@@ -27,20 +27,27 @@ class Posts extends React.Component {
     this.getPostsByCategory(category);
   }
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps ', nextProps);
     let category = nextProps.match.params["category"];
-    this.setState({ category: category });
-    if (typeof category === undefined) {
+    console.log('componentWillReceiveProps ', category, typeof category === typeof undefined)
+    if (typeof category === typeof undefined) {
       this.getOrRefreshPosts();
     } else {
+      this.setState({ category: category });
       this.getPostsByCategory(category);
     }
   }
   componentDidMount() {
+
     let category = this.props.location.pathname.replace("/", "");
-    this.setState({ category: category });
+
+    console.log('componentDidMount ', category,this.props)
     if (category !== "") {
+      this.setState({ category: category });
       this.getPostsByCategory(category);
-    } else {
+    }
+    if (typeof category === typeof undefined || category === "") {
+      console.log('componentDidMount ', this.props);
       this.getOrRefreshPosts();
     }
   }
@@ -50,20 +57,17 @@ class Posts extends React.Component {
       <div>
         <ul className="">
           <li className="row">
-            <div className="col-md-4">
-              <p className="text-center">Title</p>
+            <div className="col-md-7">
+              <p className="text-left">Title</p>
             </div>
-            <div className="col-md-2">
-              <p className="text-center"># Votes</p>
+            <div className="col-md-1">
+              <p className="text-center">Votes</p>
             </div>
-            <div className="col-md-2">
-              <p className="text-center"># Comments</p>
+            <div className="col-md-1">
+              <p className="text-center">Comments</p>
             </div>
-            <div className="col-md-2">
-              <p className="text-center">Voting</p>
-            </div>
-            <div className="col-md-2">
-              <p className="text-center">Edit Delete</p>
+            <div className="col-md-3">
+              <p className="text-center">Voting---Edit Delete</p>
             </div>
           </li>
         </ul>

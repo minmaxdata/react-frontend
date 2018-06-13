@@ -89,7 +89,7 @@ class CreateComment extends Component {
             </label>
           </div>
           <div>
-            <input    className='btn' type="submit" value="Submit" />
+            <input className='btn' type="submit" value="Submit" />
           </div>
         </form>
       </div>

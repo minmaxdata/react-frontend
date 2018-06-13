@@ -21,17 +21,17 @@ class Comment extends React.Component {
   };
   render() {
     return (
-      <li className="row">
-        <div className="col-md-6">
+      <li className="row pt-2">
+        <div className="col-md-9">
           <div>Body: {this.props.comment.body}</div>
           <div>Author: {this.props.comment.author}</div>
           <div>VoteScore: {this.props.comment.voteScore}</div>
         </div>
-        <div className="col-md-6">
-          <button onClick={this.openEditModal}>
+        <div className="col-md-3">
+          <button   className="btn" onClick={this.openEditModal}>
             <FontAwesome.FaEdit />
           </button>
-          <button onClick={this.deleteComment}>
+          <button   className="btn" onClick={this.deleteComment}>
             <FontAwesome.FaTimesCircle />
           </button>
         </div>
@@ -40,7 +40,7 @@ class Comment extends React.Component {
             comment={this.props.comment}
             close={this.closeEditModal}
           />
-          <button onClick={this.closeEditModal}>Close Modal</button>
+          <button   className="btn" onClick={this.closeEditModal}>Close Modal</button>
         </Modal>
       </li>
     );

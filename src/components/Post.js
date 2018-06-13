@@ -12,18 +12,18 @@ class Post extends React.Component {
   render() {
     return (
       <li className="row">
-        <div className="col-md-4">
+        <div className="col-md-7">
           <Link to={`${this.props.post.category}/${this.props.post.id}`}>
             {this.props.post.title}
           </Link>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-1">
           <p className="text-center">{this.props.post.voteScore}</p>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-1">
           <p className="text-center">{this.props.post.commentCount}</p>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-3">
           <p className="text-center">
             <Vote
               type={"post"}
@@ -31,11 +31,7 @@ class Post extends React.Component {
               category={this.props.post.category}
               getPosts={this.refreshPosts}
             />
-          </p>
-        </div>
-        <div className="col-md-2">
-          <p className="text-center">
-            <Link
+              <Link
               className="btn"
               role="button"
               to={`/${this.props.post.category}/${this.props.post.id}/edit`}

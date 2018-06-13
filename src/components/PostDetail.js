@@ -75,6 +75,7 @@ class PostDetail extends Component {
           <div>Category: {this.state.post.category}</div>
           <div>Body: {this.state.post.body}</div>
           <div>VoteScore: {this.state.post.voteScore}</div>
+          <div>Comment Count: {this.state.post.commentCount}</div>
         </div>
         <div />
 
