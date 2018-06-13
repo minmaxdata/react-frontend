@@ -49,7 +49,7 @@ class PostDetail extends Component {
               <Vote
                 type={"post"}
                 itemId={this.state.post.id}
-                getPosts={this.refreshPost}
+                getPost={this.refreshPost}
               />
             </p>
           </li>

@@ -4,11 +4,13 @@ import Post from "./Post";
 
 class Posts extends React.Component {
   state = {
-    sortBy: "all",
+    category: "",
     posts: []
   };
 
   getOrRefreshPosts = () => {
+    console.log(" getOrRefreshPosts state ", this.state);
+
     ReadableAPI.getPosts()
       .then(response => {
         this.setState({ posts: response });
@@ -16,24 +18,37 @@ class Posts extends React.Component {
       .catch(reason => console.error(reason));
   };
   getPostsByCategory = id => {
+    console.log(" getPostsByCategory ", this.state.category, id);
     ReadableAPI.getPostByCategory(id)
       .then(response => {
         this.setState({ posts: response });
       })
       .catch(reason => console.error(reason));
   };
+
+  handleGetPost= category => {
+    console.log(" handleGetPost ", category);
+    this.getPostsByCategory(category);
+  }
   componentWillReceiveProps(nextProps) {
-    console.log(" next props ", nextProps.match.params);
-    let param = nextProps.match.params["category"];
-    if (typeof param === "undefined") {
+    let category = nextProps.match.params["category"];
+    this.setState({ category: category });
+    console.log(" componentWillReceiveProps ", nextProps, this.state, category);
+    if (typeof category === undefined) {
       this.getOrRefreshPosts();
     } else {
-      this.getPostsByCategory(param);
+      this.getPostsByCategory(category);
     }
   }
   componentDidMount() {
-    console.log("props ", this.props);
-    this.getOrRefreshPosts();
+    let category = this.props.location.pathname.replace("/", "");
+    console.log(" componentDidMount ", this.props, this.state, category);
+    this.setState({ category: category });
+    if (category !== "") {
+      this.getPostsByCategory(category);
+    } else {
+      this.getOrRefreshPosts();
+    }
   }
 
   render() {
@@ -65,7 +80,7 @@ class Posts extends React.Component {
               post={post}
               type={"post"}
               itemId={post.id}
-              getPosts={this.getOrRefreshPosts}
+              getPosts={this.handleGetPost}
             />
           ))}
         </ul>

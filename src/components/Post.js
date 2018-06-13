@@ -6,7 +6,8 @@ import Vote from './Vote'
 
 class Post extends React.Component {
   refreshPosts = () => {
-    this.props.getPosts()
+    console.log('refresh posts ', this.props.post.category)
+    this.props.getPosts(this.props.post.category)
   }
   render() {
     return (
@@ -26,7 +27,7 @@ class Post extends React.Component {
         </div>
         <div className="col-md-2">
           <p className="text-center">
-            <Vote type={'post'} itemId={this.props.post.id}  getPosts={this.refreshPosts}/>
+            <Vote type={'post'} itemId={this.props.post.id}  category={this.props.post.category} getPosts={this.refreshPosts}/>
           </p>
         </div>
         <div className="col-md-2">
