@@ -9,8 +9,6 @@ class Posts extends React.Component {
   };
 
   getOrRefreshPosts = () => {
-    console.log(" getOrRefreshPosts state ", this.state);
-
     ReadableAPI.getPosts()
       .then(response => {
         this.setState({ posts: response });
@@ -18,7 +16,6 @@ class Posts extends React.Component {
       .catch(reason => console.error(reason));
   };
   getPostsByCategory = id => {
-    console.log(" getPostsByCategory ", this.state.category, id);
     ReadableAPI.getPostByCategory(id)
       .then(response => {
         this.setState({ posts: response });
@@ -26,14 +23,12 @@ class Posts extends React.Component {
       .catch(reason => console.error(reason));
   };
 
-  handleGetPost= category => {
-    console.log(" handleGetPost ", category);
+  handleGetPost = category => {
     this.getPostsByCategory(category);
   }
   componentWillReceiveProps(nextProps) {
     let category = nextProps.match.params["category"];
     this.setState({ category: category });
-    console.log(" componentWillReceiveProps ", nextProps, this.state, category);
     if (typeof category === undefined) {
       this.getOrRefreshPosts();
     } else {
@@ -42,7 +37,6 @@ class Posts extends React.Component {
   }
   componentDidMount() {
     let category = this.props.location.pathname.replace("/", "");
-    console.log(" componentDidMount ", this.props, this.state, category);
     this.setState({ category: category });
     if (category !== "") {
       this.getPostsByCategory(category);

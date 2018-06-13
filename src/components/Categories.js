@@ -20,10 +20,10 @@ class Categories extends React.Component {
       <div>
         <ul className="categories">
           <li>
-            <Link to="/create">Add a Post</Link>
+            <Link  role='btn'  className='btn' to="/create">Add a Post</Link>
           </li>
           <li>
-            <Link to="/">All Posts</Link>
+            <Link  role='btn'  className='btn' to="/">All Posts</Link>
           </li>
           {this.state.categories.map(category => (
             <Category key={category.name} category={category} />

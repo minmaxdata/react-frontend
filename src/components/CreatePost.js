@@ -12,26 +12,53 @@ class CreatePost extends Component {
     body: ""
   };
 
+  getPostById = id => {
+    ReadableAPI.getPostById(id)
+      .then(response => {
+        this.setState({ ...response });
+      })
+      .catch(reason => console.error(reason));
+  };
+
+  handleChange = event => {
+    this.setState({[event.target.name]: event.target.value});
+
+  };
+
+
   handleSubmit = e => {
     e.preventDefault();
 
     const values = serializeForm(e.target, { hash: true });
-    const post = {
-      ...values,
-      id: uuid(),
-      timestamp: Date.now()
-    };
-    ReadableAPI.addPost(post).then(response => {
-      this.props.history.push("/");
-    });
+    if (this.state.id) {
+      let payload = { ...values, id: this.state.id};
+      ReadableAPI.editPost(payload).then(response => {
+        console.log("response ", response, this.props);
+        var url = `/${response.category}`;
+        this.props.history.push(url);
+      });
+
+    } else {
+      const post = {
+        ...values,
+        id: uuid(),
+        timestamp: Date.now()
+      };
+      ReadableAPI.addPost(post).then(response => {
+        this.props.history.push("/");
+      });
+
+    }
   };
 
-    componentDidMount() {
-      //const id = this.props.post.id;
-      console.log("edit post  ", this.props);
-      let id = this.props.match.params.id;
-      //this.getOrRefreshPost(id);
+  componentDidMount() {
+    let id = this.props.match.params.id;
+    this.setState({id: id})
+    console.log("edit post  ", id);
+    if (typeof id !== undefined) {
+      this.getPostById(id);
     }
+  }
 
   render() {
     return (
@@ -41,26 +68,50 @@ class CreatePost extends Component {
         </Link>
         <form onSubmit={this.handleSubmit} className="create-contact-form">
           <div>
-            Title:
-            <input type="text" name="title" placeholder="Title" />
+            <label>
+              Title:
+              <input
+                type="text"
+                name="title"
+                placeholder="Author"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
+            </label>
           </div>
           <div>
-            Author:
-            <input type="text" name="author" placeholder="Author" />
+            <label>
+              Author:
+              <input
+                type="text"
+                name="author"
+                placeholder="Author"
+                value={this.state.author}
+                onChange={this.handleChange}
+              />
+            </label>
           </div>
+
           <div>
             Category:
-            <select name="category">
+            <select name="category" value={this.state.category} onChange={this.handleChange} >
               <option value="react">React</option>
               <option value="redux">Redux</option>
               <option value="udacity">Udacity</option>
             </select>
           </div>
-          <div>Body: </div>
-          <input name="body" type="text" />
-
           <div>
-            <input type="submit" value="Submit" />
+            <label>
+              <div>Body:</div>
+              <textarea
+                name="body"
+                value={this.state.body}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div>
+            <input className="btn" type="submit" value="Submit" />
           </div>
         </form>
       </div>

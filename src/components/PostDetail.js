@@ -55,6 +55,8 @@ class PostDetail extends Component {
           </li>
           <li className="col-md-2">
             <Link
+              className="btn"
+              role="button"
               to={`/${this.state.post.category}/${this.state.post.id}/edit`}
             >
               <EditItem />
