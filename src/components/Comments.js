@@ -51,13 +51,18 @@ class Comments extends React.Component {
   render() {
     return (
       <div>
-      <hr />
+        <hr />
         <div className="row">
           <div className="col-md-9">
             <h4>Comments</h4>
           </div>
           <div className="col-md-3">
-            <button   className="btn" onClick={this.handleOpenModal}>Add Comment</button>
+            <button
+              className="btn btn-outline-primary"
+              onClick={this.handleOpenModal}
+            >
+              Add Comment
+            </button>
             <Modal isOpen={this.state.showModal} ariaHideApp={false}>
               <CreateComment
                 parentId={this.props.id}

@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import * as FontAwesome from "react-icons/lib/fa";
 import * as ReadableAPI from "../utils/api";
 import CreateComment from "./CreateComment";
+import Vote from "./Vote";
 
 class Comment extends React.Component {
   state = {
@@ -28,10 +29,22 @@ class Comment extends React.Component {
           <div>VoteScore: {this.props.comment.voteScore}</div>
         </div>
         <div className="col-md-3">
-          <button   className="btn" onClick={this.openEditModal}>
+          <Vote
+            type={"post"}
+            itemId={this.props.comment.id}
+            getPost={this.refreshPost}
+          />
+
+          <button
+            className="btn btn-outline-primary"
+            onClick={this.openEditModal}
+          >
             <FontAwesome.FaEdit />
           </button>
-          <button   className="btn" onClick={this.deleteComment}>
+          <button
+            className="btn btn-outline-primary"
+            onClick={this.deleteComment}
+          >
             <FontAwesome.FaTimesCircle />
           </button>
         </div>
@@ -40,7 +53,12 @@ class Comment extends React.Component {
             comment={this.props.comment}
             close={this.closeEditModal}
           />
-          <button   className="btn" onClick={this.closeEditModal}>Close Modal</button>
+          <button
+            className="btn btn-outline-primary"
+            onClick={this.closeEditModal}
+          >
+            Close Modal
+          </button>
         </Modal>
       </li>
     );
