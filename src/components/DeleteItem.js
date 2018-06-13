@@ -37,7 +37,7 @@ class DeleteItem extends React.Component {
   render() {
     return (
       <span>
-        <button className='btn' onClick={this.deleteItem}>
+        <button className='btn btn-outline-primary' onClick={this.deleteItem}>
           <FontAwesome.FaTimesCircle />
         </button>
       </span>

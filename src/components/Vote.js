@@ -41,10 +41,10 @@ class Vote extends React.Component {
   render() {
     return (
       <span>
-        <button className="btn" role="button" onClick={this.voteUp}>
+        <button className="btn btn-outline-primary" role="button" onClick={this.voteUp}>
           <FontAwesome.FaThumbsOUp />
         </button>
-        <button className="btn" onClick={this.voteDown}>
+        <button className="btn btn-outline-primary" onClick={this.voteDown}>
           <FontAwesome.FaThumbsODown />
         </button>
       </span>

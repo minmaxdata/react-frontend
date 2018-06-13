@@ -41,44 +41,42 @@ class PostDetail extends Component {
     return (
       <div>
         <ul className="row">
-          <li className="col-md-8">
+          <li className="col-md-12">
             <h4>Post</h4>
           </li>
-          <li className="col-md-2">
+        </ul>
+
+        <ul className="row">
+          <li className="col-md-9">
+            <div>Title: {this.state.post.title}</div>
+            <div>Author: {this.state.post.author}</div>
+            <div>Category: {this.state.post.category}</div>
+            <div>Body: {this.state.post.body}</div>
+            <div>VoteScore: {this.state.post.voteScore}</div>
+            <div>Comment Count: {this.state.post.commentCount}</div>
+          </li>
+          <li className="col-md-3">
             <p className="text-center">
               <Vote
                 type={"post"}
                 itemId={this.state.post.id}
                 getPost={this.refreshPost}
               />
+              <Link
+                className="btn btn-outline-primary"
+                role="button"
+                to={`/${this.state.post.category}/${this.state.post.id}/edit`}
+              >
+                <EditItem />
+              </Link>
+              <DeleteItem
+                type={"post"}
+                itemId={this.state.post.id}
+                getPosts={this.updateRoute}
+              />
             </p>
           </li>
-          <li className="col-md-2">
-            <Link
-              className="btn"
-              role="button"
-              to={`/${this.state.post.category}/${this.state.post.id}/edit`}
-            >
-              <EditItem />
-            </Link>
-            <DeleteItem
-              type={"post"}
-              itemId={this.state.post.id}
-              getPosts={this.updateRoute}
-            />
-          </li>
         </ul>
-
-        <div>
-          <div>Title: {this.state.post.title}</div>
-          <div>Author: {this.state.post.author}</div>
-          <div>Category: {this.state.post.category}</div>
-          <div>Body: {this.state.post.body}</div>
-          <div>VoteScore: {this.state.post.voteScore}</div>
-          <div>Comment Count: {this.state.post.commentCount}</div>
-        </div>
-        <div />
-
         <div>
           <Comments id={this.props.match.params.id} />
         </div>
