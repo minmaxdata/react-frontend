@@ -41,13 +41,13 @@ class Posts extends React.Component {
 
     let category = this.props.location.pathname.replace("/", "");
 
-    console.log('componentDidMount ', category,this.props)
+    console.log('componentDidMount category', category,this.props)
     if (category !== "") {
       this.setState({ category: category });
       this.getPostsByCategory(category);
     }
     if (typeof category === typeof undefined || category === "") {
-      console.log('componentDidMount ', this.props);
+      console.log('componentDidMount category', this.props);
       this.getOrRefreshPosts();
     }
   }
@@ -76,7 +76,6 @@ class Posts extends React.Component {
             <Post
               key={post.id}
               post={post}
-              type={"post"}
               itemId={post.id}
               getPosts={this.handleGetPost}
             />

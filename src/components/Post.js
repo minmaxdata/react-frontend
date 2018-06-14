@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import * as ReadableAPI from "../utils/api";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
 import Vote from "./Vote";
 
 class Post extends React.Component {
-  refreshPosts = () => {
-    console.log("refresh posts ", this.props.post.category);
+  refreshPosts = (category) => {
+    console.log("refresh posts ", category, this.props);
     this.props.getPosts(this.props.post.category);
   };
+  deletePost = (id) => {
+    ReadableAPI.deletePost(id).then(response => {
+      this.refreshPosts(response.category)
+    });
+  }
+  castVote = payload => {
+    ReadableAPI.votePost(payload).then(response => {
+    });
+  };
+
   render() {
     return (
       <li className="row">
@@ -26,10 +37,9 @@ class Post extends React.Component {
         <div className="col-md-3">
           <p className="text-center">
             <Vote
-              type={"post"}
               itemId={this.props.post.id}
-              category={this.props.post.category}
-              getPosts={this.refreshPosts}
+              castVote={this.castVote}
+              onVote={this.refreshPosts}
             />
               <Link
               className="btn"
@@ -40,9 +50,9 @@ class Post extends React.Component {
             </Link>
 
             <DeleteItem
-              type={"post"}
+              deleteItem={this.deletePost}
               itemId={this.props.post.id}
-              getPosts={this.refreshPosts}
+              onDelete={this.refreshPosts}
             />
           </p>
         </div>

@@ -22,7 +22,6 @@ class Comments extends React.Component {
   deleteComment = id => {
     ReadableAPI.deleteComment(id)
       .then(response => {
-        console.log(" comments response ", response);
         this.getOrRefreshComments();
       })
       .catch(reason => console.error(reason));
@@ -33,7 +32,7 @@ class Comments extends React.Component {
   };
 
   getOrRefreshComments = () => {
-    //console.log("comments props ", this.props.id);
+    console.log("comments props ", this.props.id);
     let id = this.props.id;
 
     ReadableAPI.getComments(id)

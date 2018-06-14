@@ -9,25 +9,34 @@ import Vote from "./Vote";
 class PostDetail extends Component {
   state = {
     post: [],
-    redirect: false
+    category: ""
   };
 
   getOrRefreshPost = id => {
     ReadableAPI.getPostById(id)
       .then(response => {
-        this.setState({ post: response });
+        this.setState({ post: response, category: response.category });
       })
       .catch(reason => console.error(reason));
   };
-
-  updateRoute = () => {
-    console.log("update route props ", this.props);
+  updateDelete = () => {
+    console.log("update delete  ", this.props, this.state);
     this.props.history.push("/");
   };
   refreshPost = () => {
     console.log("refresh post ", this.props);
     let id = this.state.post.id;
     this.getOrRefreshPost(id);
+  };
+  deletePost = id => {
+    console.log("delete post ", id);
+    ReadableAPI.deletePost(id).then(response => {
+      console.log("delete post callback", response);
+    });
+  };
+  castVote = payload => {
+    ReadableAPI.votePost(payload).then(response => {
+    });
   };
 
   componentDidMount() {
@@ -58,9 +67,9 @@ class PostDetail extends Component {
           <li className="col-md-3">
             <p className="text-center">
               <Vote
-                type={"post"}
+                castVote={this.castVote}
                 itemId={this.state.post.id}
-                getPost={this.refreshPost}
+                onVote={this.refreshPost}
               />
               <Link
                 className="btn btn-outline-primary"
@@ -70,9 +79,9 @@ class PostDetail extends Component {
                 <EditItem />
               </Link>
               <DeleteItem
-                type={"post"}
+                deleteItem={this.deletePost}
                 itemId={this.state.post.id}
-                getPosts={this.updateRoute}
+                onDelete={this.updateDelete}
               />
             </p>
           </li>

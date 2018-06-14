@@ -20,6 +20,13 @@ class Comment extends React.Component {
     this.setState({ showModal: false });
     this.props.refresh();
   };
+  castVote = (payload) => {
+    ReadableAPI.voteComment(payload).then(response => {});
+  };
+  onVote = () => {
+    this.props.refresh();
+  }
+
   render() {
     return (
       <li className="row pt-2">
@@ -30,9 +37,9 @@ class Comment extends React.Component {
         </div>
         <div className="col-md-3">
           <Vote
-            type={"post"}
+            castVote={this.castVote}
             itemId={this.props.comment.id}
-            getPost={this.refreshPost}
+            onVote={this.onVote}
           />
 
           <button
