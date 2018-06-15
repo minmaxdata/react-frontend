@@ -29,7 +29,6 @@ class Posts extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps ', nextProps);
     let category = nextProps.match.params["category"];
-    console.log('componentWillReceiveProps ', category, typeof category === typeof undefined)
     if (typeof category === typeof undefined) {
       this.getOrRefreshPosts();
     } else {
@@ -47,7 +46,6 @@ class Posts extends React.Component {
       this.getPostsByCategory(category);
     }
     if (typeof category === typeof undefined || category === "") {
-      console.log('componentDidMount category', this.props);
       this.getOrRefreshPosts();
     }
   }

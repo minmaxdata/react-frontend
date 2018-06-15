@@ -1,10 +1,8 @@
-import React, { Component } from "react";
 
-class GenericNotFound extends React.Component {
+export const GenericNotFound = ({ location }) => {
   render(){
        return(
-           <h1>Location Not Found</h1>
+           <h1>{location.pathname} Not Found</h1>
        )
    }
 }
-export default GenericNotFound;

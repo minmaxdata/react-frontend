@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, NavLink } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
 import Category from "./Category";
 
@@ -20,10 +20,10 @@ class Categories extends React.Component {
       <div>
         <ul className="categories">
           <li>
-            <Link  role='btn'  className='btn' to="/create">Add a Post</Link>
+            <NavLink activeClassName="active" className='btn' to="/create">Add a Post</NavLink>
           </li>
           <li>
-            <Link  role='btn'  className='btn' to="/">All Posts</Link>
+            <NavLink activeClassName="active"  className='btn' to="/">All Posts</NavLink>
           </li>
           {this.state.categories.map(category => (
             <Category key={category.name} category={category} />

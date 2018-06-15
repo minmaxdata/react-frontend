@@ -21,41 +21,36 @@ class CreatePost extends Component {
   };
 
   handleChange = event => {
-    this.setState({[event.target.name]: event.target.value});
-
+    this.setState({ [event.target.name]: event.target.value });
   };
-
 
   handleSubmit = e => {
     e.preventDefault();
 
     const values = serializeForm(e.target, { hash: true });
-    if (this.state.id) {
-      let payload = { ...values, id: this.state.id};
-      ReadableAPI.editPost(payload).then(response => {
-        console.log("response ", response, this.props);
-        var url = `/${response.category}`;
-        this.props.history.push(url);
-      });
 
+    if (this.state.id) {
+      let payload = { ...values, id: this.state.id };
+      ReadableAPI.editPost(payload).then(response => {
+        this.props.history.goBack();
+      });
     } else {
-      const post = {
+      let post = {
         ...values,
         id: uuid(),
         timestamp: Date.now()
       };
       ReadableAPI.addPost(post).then(response => {
-        this.props.history.push("/");
+        this.props.history.goBack();
       });
-
     }
   };
 
   componentDidMount() {
     let id = this.props.match.params.id;
-    this.setState({id: id})
-    console.log("edit post  ", id);
-    if (typeof id !== undefined) {
+    this.setState({ id: id });
+    console.log("edit post  ", this.props);
+    if (typeof id !== typeof undefined) {
       this.getPostById(id);
     }
   }
@@ -63,7 +58,7 @@ class CreatePost extends Component {
   render() {
     return (
       <div>
-        <Link className="" to="/">
+        <Link className="btn " to="/">
           Return to main page
         </Link>
         <form onSubmit={this.handleSubmit} className="create-contact-form">
@@ -94,7 +89,11 @@ class CreatePost extends Component {
 
           <div>
             Category:
-            <select name="category" value={this.state.category} onChange={this.handleChange} >
+            <select
+              name="category"
+              value={this.state.category}
+              onChange={this.handleChange}
+            >
               <option value="react">React</option>
               <option value="redux">Redux</option>
               <option value="udacity">Udacity</option>

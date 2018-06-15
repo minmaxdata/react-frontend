@@ -11,13 +11,10 @@ class Post extends React.Component {
     this.props.getPosts(this.props.post.category);
   };
   deletePost = (id) => {
-    ReadableAPI.deletePost(id).then(response => {
-      this.refreshPosts(response.category)
-    });
+    ReadableAPI.deletePost(id).then(response => {});
   }
   castVote = payload => {
-    ReadableAPI.votePost(payload).then(response => {
-    });
+    ReadableAPI.votePost(payload).then(response => {});
   };
 
   render() {
@@ -48,7 +45,6 @@ class Post extends React.Component {
             >
               <EditItem />
             </Link>
-
             <DeleteItem
               deleteItem={this.deletePost}
               itemId={this.props.post.id}
