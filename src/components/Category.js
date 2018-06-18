@@ -1,18 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { capitalize } from "../utils/helpers";
 
-class Category extends Component {
-  render() {
-    //console.log("props ", this.props);
-    const category = capitalize(`${this.props.category.name}`);
-    return (
-      <li className="category">
-        <Link role='button'  className='btn' to={`/${this.props.category.path}`}>
-          {category} Posts
-        </Link>
-      </li>
-    );
-  }
-}
+const Category = ({ category }) => {
+  console.log("category ", category);
+  const name = capitalize(`${category.name}`);
+  return (
+    <li className="category">
+      <Link role="button" className="btn" to={`/${category.path}`}>
+        {name} Posts
+      </Link>
+    </li>
+  );
+};
 export default Category;
