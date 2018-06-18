@@ -1,59 +1,57 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
 import Vote from "./Vote";
 
-class Post extends React.Component {
-  refreshPosts = (category) => {
-    console.log("refresh posts ", category, this.props);
-    this.props.getPosts(this.props.post.category);
+const Post = ({ post}) => {
+  const refreshPost = category => {
+    console.log("refresh posts ", post);
+    ReadableAPI.getPostById(post.id).then(response => {
+      console.log("refresh post ", response);
+    });
   };
-  deletePost = (id) => {
-    ReadableAPI.deletePost(id).then(response => {});
-  }
-  castVote = payload => {
-    ReadableAPI.votePost(payload).then(response => {});
+  const deletePost = id => {
+    ReadableAPI.deletePost(id).then(response => {
+        console.log("deletePost post ", response);
+    });
+  };
+  const castVote = payload => {
+    ReadableAPI.votePost(payload).then(response => {
+        console.log("vote post ", response);
+    });
   };
 
-  render() {
-    return (
-      <li className="row">
-        <div className="col-md-7">
-          <Link to={`${this.props.post.category}/${this.props.post.id}`}>
-            {this.props.post.title}
+  return (
+    <li className="row">
+      <div className="col-md-7">
+        <Link to={`${post.category}/${post.id}`}>{post.title}</Link>
+      </div>
+      <div className="col-md-1">
+        <p className="text-center">{post.voteScore}</p>
+      </div>
+      <div className="col-md-1">
+        <p className="text-center">{post.commentCount}</p>
+      </div>
+      <div className="col-md-3">
+        <p className="text-center">
+          <Vote itemId={post.id} castVote={castVote} onVote={refreshPost} />
+          <Link
+            className="btn"
+            role="button"
+            to={`/${post.category}/${post.id}/edit`}
+          >
+            <EditItem />
           </Link>
-        </div>
-        <div className="col-md-1">
-          <p className="text-center">{this.props.post.voteScore}</p>
-        </div>
-        <div className="col-md-1">
-          <p className="text-center">{this.props.post.commentCount}</p>
-        </div>
-        <div className="col-md-3">
-          <p className="text-center">
-            <Vote
-              itemId={this.props.post.id}
-              castVote={this.castVote}
-              onVote={this.refreshPosts}
-            />
-              <Link
-              className="btn"
-              role="button"
-              to={`/${this.props.post.category}/${this.props.post.id}/edit`}
-            >
-              <EditItem />
-            </Link>
-            <DeleteItem
-              deleteItem={this.deletePost}
-              itemId={this.props.post.id}
-              onDelete={this.refreshPosts}
-            />
-          </p>
-        </div>
-      </li>
-    );
-  }
-}
+          <DeleteItem
+            deleteItem={deletePost}
+            itemId={post.id}
+            onDelete={refreshPost}
+          />
+        </p>
+      </div>
+    </li>
+  );
+};
 export default Post;

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Modal from "react-modal";
-import * as FontAwesome from "react-icons/lib/fa";
 import * as ReadableAPI from "../utils/api";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
