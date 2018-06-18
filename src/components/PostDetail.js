@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
 import Comments from "../components/Comments";
 import DeleteItem from "./DeleteItem";

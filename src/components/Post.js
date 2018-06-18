@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
 import Vote from "./Vote";
 
-class Post extends React.Component {
+class Post extends Component {
   refreshPosts = (category) => {
     console.log("refresh posts ", category, this.props);
     this.props.getPosts(this.props.post.category);

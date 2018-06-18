@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Modal from "react-modal";
 import serializeForm from "form-serialize";
 import uuid from "uuid";
 import * as ReadableAPI from "../utils/api";

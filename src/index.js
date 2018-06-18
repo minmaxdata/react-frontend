@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import App from './containers/App'
-import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 import 'normalize.css'
 import 'bootstrap/dist/css/bootstrap.min.css';

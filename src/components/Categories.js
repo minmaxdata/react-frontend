@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Route, Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
 import Category from "./Category";
 
-class Categories extends React.Component {
+class Categories extends Component {
   state = {
     sortBy: "All",
     categories: []

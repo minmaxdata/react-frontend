@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as FontAwesome from "react-icons/lib/fa";
 
-class Vote extends React.Component {
+class Vote extends Component {
   voteOnItem = async (payload) => {
     const { castVote, itemId, onVote } = this.props;
     console.log('vote ', this.props)

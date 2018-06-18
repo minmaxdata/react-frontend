@@ -5,7 +5,7 @@ import * as ReadableAPI from "../utils/api";
 import CreateComment from "./CreateComment";
 import Vote from "./Vote";
 
-class Comment extends React.Component {
+class Comment extends Component {
   state = {
     showModal: false
   };

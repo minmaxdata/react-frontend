@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as ReadableAPI from "../utils/api";
 import Post from "./Post";
 
-class Posts extends React.Component {
+class Posts extends Component {
   state = {
     category: "",
     posts: []
