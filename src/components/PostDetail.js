@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import * as ReadableAPI from "../utils/api";
-import Comments from "../components/Comments";
+import Comments from "../containers/CommentsContainer";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
 import Vote from "./Vote";

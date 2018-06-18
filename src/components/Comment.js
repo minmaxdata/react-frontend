@@ -1,74 +1,15 @@
-import React, { Component } from "react";
-import Modal from "react-modal";
-import * as FontAwesome from "react-icons/lib/fa";
-import * as ReadableAPI from "../utils/api";
-import CreateComment from "./CreateComment";
-import Vote from "./Vote";
+import React from "react";
+import CommentManager from './CommentManager'
 
-class Comment extends React.Component {
-  state = {
-    showModal: false
-  };
-  deleteComment = () => {
-    let id = this.props.comment.id;
-    this.props.deleteComment(id);
-  };
-  openEditModal = () => {
-    this.setState({ showModal: true });
-  };
-  closeEditModal = () => {
-    this.setState({ showModal: false });
-    this.props.refresh();
-  };
-  castVote = (payload) => {
-    ReadableAPI.voteComment(payload).then(response => {});
-  };
-  onVote = () => {
-    this.props.refresh();
-  }
-
-  render() {
+const Comment = ({comment}) =>  {
     return (
       <li className="row pt-2">
         <div className="col-md-9">
-          <div>Body: {this.props.comment.body}</div>
-          <div>Author: {this.props.comment.author}</div>
-          <div>VoteScore: {this.props.comment.voteScore}</div>
+          <div>Body: {comment.body} : {comment.author}</div>
+          <div>VoteScore: {comment.voteScore}</div>
         </div>
-        <div className="col-md-3">
-          <Vote
-            castVote={this.castVote}
-            itemId={this.props.comment.id}
-            onVote={this.onVote}
-          />
-
-          <button
-            className="btn btn-outline-primary"
-            onClick={this.openEditModal}
-          >
-            <FontAwesome.FaEdit />
-          </button>
-          <button
-            className="btn btn-outline-primary"
-            onClick={this.deleteComment}
-          >
-            <FontAwesome.FaTimesCircle />
-          </button>
-        </div>
-        <Modal isOpen={this.state.showModal} ariaHideApp={false}>
-          <CreateComment
-            comment={this.props.comment}
-            close={this.closeEditModal}
-          />
-          <button
-            className="btn btn-outline-primary"
-            onClick={this.closeEditModal}
-          >
-            Close Modal
-          </button>
-        </Modal>
+        <CommentManager />
       </li>
     );
-  }
 }
 export default Comment;

@@ -1,8 +1,9 @@
 import React from "react";
+import * as ReadableAPI from "../utils/api";
 import Comments from "../components/Comments";
 
 class CommentsContainer extends React.Component {
-  state = { comments: [] }
+  state = { comments: [] };
   getOrRefreshComments = () => {
     console.log("comments props ", this.props.id);
     let id = this.props.id;
@@ -23,4 +24,4 @@ class CommentsContainer extends React.Component {
     return <Comments comments={this.state.comments} />;
   }
 }
-export default CommentsContainer
+export default CommentsContainer;

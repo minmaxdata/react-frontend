@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as FontAwesome from "react-icons/lib/fa";
 
-class DeleteItem extends React.Component {
+class DeleteItem extends Component {
   deleteItem = async () => {
     const { deleteItem, itemId, onDelete } = this.props;
     try {

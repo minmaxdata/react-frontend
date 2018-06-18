@@ -1,26 +1,34 @@
-import React from "react";
-import Comments from "../components/Comment";
+import { React, Component } from "react";
+import * as ReadableAPI from "../utils/api";
+import Comments from "../components/CommentManager";
 
-class CommentContainer extends React.Component {
-  state = { comment: [] };
-  getOrRefreshComment = () => {
-    console.log("comments props ", this.props.id);
-    let id = this.props.id;
-
-    ReadableAPI.getCommentById(id)
-      .then(response => {
-        console.log(" comments response ", response);
-        this.setState({ comments: response });
-      })
-      .catch(reason => console.error(reason));
-  };
-
-  componentDidMount() {
-    this.getOrRefreshComment();
+class CommentContainer extends Component {
+  state = {
+    comment: [],
+    showModal: false
   }
-
+    deleteComment = () => {
+      let id = this.props.comment.id;
+      this.props.deleteComment(id);
+    };
+    openEditModal = () => {
+      this.setState({ showModal: true });
+    };
+    closeEditModal = () => {
+      this.setState({ showModal: false });
+      this.props.refresh();
+    };
+    castVote = (payload) => {
+      ReadableAPI.voteComment(payload).then(response => {});
+    };
+    onVote = () => {
+      console.log('onvote')
+      this.props.refresh();
+    }
   render() {
-    return <Comment comment={this.state.comment} />;
+    return (
+      <CommentManager itemId={this.props.comment.id} onVote={castVote} onEdit={openEditModal} delete={deleteComment}/>
+    )
   }
 }
-export default CommentsContainer
+export default CommentContainer
