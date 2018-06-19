@@ -2,19 +2,14 @@ import * as types from "./../actions/types";
 
 function posts(state = [], action) {
   let error;
+  console.log('posts reducer ', state, action)
   switch (action.type) {
-
-    case types.POSTS_LIST:
-      return { ...state, postsList: {posts:[], error: null, loading: true} };
-    case types.POSTS_LIST_SUCCESS:
-      return { ...state, postsList: {posts: action.payload, error:null, loading: false} };
-    case types.POSTS_LIST_FAILURE:
-      error = action.payload || {message: action.payload.message};
-      return { ...state, postsList: {posts: [], error: error, loading: false} };
-    case types.RESET_POSTS_LIST:
-      return { ...state, postsList: {posts: [], error:null, loading: false} };
-
-
+    case types.REQUEST_ALL_POSTS:
+      return [];
+    case types.RECEIVE_ALL_POSTS:
+      return  action.posts;
+    case types.RESET_POSTS:
+      return []
     default:
       return state;
   }
