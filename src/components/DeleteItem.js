@@ -3,7 +3,6 @@ import * as FontAwesome from "react-icons/lib/fa";
 
 const DeleteItem = ({  deleteItem, itemId, onDelete }) => {
   const removeItem = async () => {
-    console.log(' delete ', deleteItem, itemId, onDelete )
     try {
       await deleteItem(itemId);
       onDelete(); // callback

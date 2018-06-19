@@ -7,7 +7,6 @@ import Vote from "./Vote";
 
 class Post extends Component {
   refreshPosts = () => {
-    console.log("refresh posts ",  this.props);
     this.props.getPosts(this.props.post.category);
   };
   deletePost = (id) => {

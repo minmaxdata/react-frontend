@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import * as ReadableAPI from "../utils/api";
+import PostsHeader from "./PostsHeader";
 import Post from "./Post";
+import { connect } from "react-redux";
+import { getPosts } from "./../actions/posts";
+import { CategorySelections } from "./../actions/types";
 
 class Posts extends Component {
   state = {
@@ -25,9 +29,9 @@ class Posts extends Component {
 
   handleGetPost = category => {
     this.getPostsByCategory(category);
-  }
+  };
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps ', nextProps);
+    console.log("componentWillReceiveProps ", nextProps);
     let category = nextProps.match.params["category"];
     if (typeof category === typeof undefined) {
       this.getOrRefreshPosts();
@@ -37,38 +41,14 @@ class Posts extends Component {
     }
   }
   componentDidMount() {
-
-    let category = this.props.location.pathname.replace("/", "");
-
-    console.log('componentDidMount category', category,this.props)
-    if (category !== "") {
-      this.setState({ category: category });
-      this.getPostsByCategory(category);
-    }
-    if (typeof category === typeof undefined || category === "") {
-      this.getOrRefreshPosts();
-    }
+    console.log(' this.props ', this.props)
+    this.props.dispatchGetPosts();
   }
 
   render() {
     return (
       <div>
-        <ul className="">
-          <li className="row">
-            <div className="col-md-7">
-              <p className="text-left">Title</p>
-            </div>
-            <div className="col-md-1">
-              <p className="text-center">Votes</p>
-            </div>
-            <div className="col-md-1">
-              <p className="text-center">Comments</p>
-            </div>
-            <div className="col-md-3">
-              <p className="text-center">Voting---Edit Delete</p>
-            </div>
-          </li>
-        </ul>
+        <PostsHeader />
         <ul className="">
           {this.state.posts.map(post => (
             <Post
@@ -83,4 +63,20 @@ class Posts extends Component {
     );
   }
 }
-export default Posts;
+function mapStateToProps(state) {
+  return {
+    posts: state.posts
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchGetPosts: () => {
+      dispatch(getPosts());
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Posts);
