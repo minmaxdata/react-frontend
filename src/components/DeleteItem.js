@@ -1,24 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import * as FontAwesome from "react-icons/lib/fa";
 
-class DeleteItem extends Component {
-  deleteItem = async () => {
-    const { deleteItem, itemId, onDelete } = this.props;
+const DeleteItem = ({  deleteItem, itemId, onDelete }) => {
+  const removeItem = async () => {
+    console.log(' delete ', deleteItem, itemId, onDelete )
     try {
-      await this.props.deleteItem(itemId);
-      this.props.onDelete(); // callback
+      await deleteItem(itemId);
+      onDelete(); // callback
     } catch (err) {
       // Handle the error
       alert(JSON.stringify(err));
     }
   };
 
-  render() {
-    return (
-      <button className="btn btn-outline-primary" onClick={this.deleteItem}>
-        <FontAwesome.FaTimesCircle />
-      </button>
-    );
-  }
-}
+  return (
+    <button className="btn btn-outline-primary" onClick={removeItem}>
+      <FontAwesome.FaTimesCircle />
+    </button>
+  );
+};
 export default DeleteItem;

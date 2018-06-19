@@ -6,8 +6,8 @@ import EditItem from "./EditItem";
 import Vote from "./Vote";
 
 class Post extends Component {
-  refreshPosts = (category) => {
-    console.log("refresh posts ", category, this.props);
+  refreshPosts = () => {
+    console.log("refresh posts ",  this.props);
     this.props.getPosts(this.props.post.category);
   };
   deletePost = (id) => {
