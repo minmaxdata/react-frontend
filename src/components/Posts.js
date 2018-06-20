@@ -3,7 +3,7 @@ import PostsHeader from "./PostsHeader";
 import Post from "./Post";
 import { connect } from "react-redux";
 import { getAllPosts, getPostsByCategory } from "./../actions/posts";
-import { CategorySelections } from "./../actions/types";
+import { Categories } from "./../actions/types";
 
 class Posts extends Component {
   componentWillReceiveProps(nextProps) {
@@ -12,16 +12,16 @@ class Posts extends Component {
     console.log("componentWillReceiveProps ", currentUrl, nextUrl);
 
     if (currentUrl !== nextUrl) {
-      let category = CategorySelections.SET_ALL;
+      let category = Categories.SET_ALL;
       if (nextUrl === "react") {
-        category = CategorySelections.SET_REACT;
+        category = Categories.SET_REACT;
       } else if (nextUrl === "redux") {
-        category = CategorySelections.SET_REDUX;
+        category = Categories.SET_REDUX;
       } else if (nextUrl === "udacity") {
-        category = CategorySelections.SET_UDACITY;
+        category = Categories.SET_UDACITY;
       }
 
-      if (category !== CategorySelections.SET_ALL) {
+      if (category !== Categories.SET_ALL) {
         this.props.dispatchGetPostsByCategory(category);
       } else {
         this.props.dispatchGetAllPosts();
@@ -55,7 +55,7 @@ class Posts extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    categorySelected: state.categorySelected
+    category: state.category
   };
 }
 

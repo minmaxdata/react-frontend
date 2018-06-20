@@ -11,6 +11,10 @@ function posts(state = [], action) {
       return [];
     case types.RECEIVE_POSTS_BY_CATEGORY:
       return action.posts;
+    case types.REQUEST_CREATE_POST:
+      return [];
+    case types.RECEIVE_CREATE_POST:
+      return [...state, action.post];
     default:
       return state;
   }
