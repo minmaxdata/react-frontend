@@ -31,7 +31,7 @@ export const getPostById = async id => {
   return json;
 };
 
-export const getPostByCategory = async id => {
+export const getPostsByCategory = async id => {
   let request = new Request(`${api}/${id}/posts`, { headers: headers });
   let response = await fetch(request);
   let json = await response.json();

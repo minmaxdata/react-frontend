@@ -7,6 +7,10 @@ function posts(state = [], action) {
       return [];
     case types.RECEIVE_ALL_POSTS:
       return action.posts;
+    case types.REQUEST_POSTS_BY_CATEGORY:
+      return [];
+    case types.RECEIVE_POSTS_BY_CATEGORY:
+      return action.posts;
     default:
       return state;
   }
