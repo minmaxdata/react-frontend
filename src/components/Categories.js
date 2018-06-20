@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import * as ReadableAPI from "../utils/api";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getCategories } from "../actions/categories";
 import Category from "./Category";
 
 class Categories extends Component {
-  state = {
-    sortBy: "All",
-    categories: []
+  static propTypes = {
+    dispatchGetCategories: PropTypes.func,
+    categories: PropTypes.array
   };
 
   componentDidMount() {
-    ReadableAPI.getCategories().then(response => {
-      this.setState({ categories: response["categories"] });
-    }).catch(reason => console.error(reason));
+    console.log(' categories componentDidMount ', this.props)
+    this.props.dispatchGetCategories();
+
   }
 
   render() {
@@ -25,7 +27,7 @@ class Categories extends Component {
           <li>
             <NavLink activeClassName="active"  className='btn' to="/">All Posts</NavLink>
           </li>
-          {this.state.categories.map(category => (
+          {this.props.categories.map(category => (
             <Category key={category.name} category={category} />
           ))}
         </ul>
@@ -33,4 +35,20 @@ class Categories extends Component {
     );
   }
 }
-export default Categories;
+function mapStateToProps({categories}) {
+  return {
+    categories
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchGetCategories: () => {
+      dispatch(getCategories());
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Categories);

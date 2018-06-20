@@ -1,25 +1,24 @@
 
 export const REQUEST_ALL_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_POSTS';
-export const RESET_POSTS = 'RESET_POSTS_LIST';
 
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
 export const REQUEST_CREATE_POST = 'REQUEST_CREATE_POST ';
 export const RECEIVE_CREATE_POST = 'RECEIVE_CREATE_POST';
-export const RESET_NEW_POST = 'RESET_NEW_POST';
 
 export const REQUEST_POST_DETAIL = 'REQUEST_POST_DETAIL';
 export const RECEIVE_POST_DETAIL = 'RECEIVE_POST_DETAIL';
-export const RESET_ACTIVE_POST = 'RESET_ACTIVE_POST';
 
 export const REQUEST_DELETE_POST = 'REQUEST_DELETE_POST';
 export const RECEIVE_DELETE_POST = 'RECEIVE_DELETE_POST';
-export const RESET_DELETED_POST = 'RESET_DELETED_POST';
+
+export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
+export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 
 export const CategorySelections = {
-  SHOW_ALL: "all",
-  SHOW_REACT: "react",
-  SHOW_REDUX: "redux",
-  SHOW_UDACITY: "udacity"
+  SET_ALL: "all",
+  SET_REACT: "react",
+  SET_REDUX: "redux",
+  SET_UDACITY: "udacity"
 };

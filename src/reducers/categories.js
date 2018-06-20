@@ -1,9 +1,11 @@
-
-export const CATEGORIES_LIST = "CATEGORIES_LIST";
+import * as types from "./../actions/types";
 
 function categories(state = [], action) {
+  console.log("categories reducer ", state, action);
   switch (action.type) {
-    case CATEGORIES_LIST:
+    case types.REQUEST_CATEGORIES:
+      return [];
+    case types.RECEIVE_CATEGORIES:
       return action.categories.categories;
     default:
       return state;
