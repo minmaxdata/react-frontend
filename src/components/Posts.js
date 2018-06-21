@@ -44,7 +44,6 @@ class Posts extends Component {
               key={post.id}
               post={post}
               itemId={post.id}
-              getPosts={this.handleGetPost}
             />
           ))}
         </ul>

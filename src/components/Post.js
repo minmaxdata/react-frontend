@@ -9,9 +9,9 @@ class Post extends Component {
   refreshPosts = () => {
     this.props.getPosts(this.props.post.category);
   };
-  deletePost = (id) => {
+  deletePost = id => {
     ReadableAPI.deletePost(id).then(response => {});
-  }
+  };
   castVote = payload => {
     ReadableAPI.votePost(payload).then(response => {});
   };
@@ -30,6 +30,7 @@ class Post extends Component {
         <div className="col-md-1">
           <p className="text-center">{this.props.post.commentCount}</p>
         </div>
+
         <div className="col-md-3">
           <p className="text-center">
             <Vote
@@ -37,7 +38,7 @@ class Post extends Component {
               castVote={this.castVote}
               onVote={this.refreshPosts}
             />
-              <Link
+            <Link
               className="btn"
               role="button"
               to={`/${this.props.post.category}/${this.props.post.id}/edit`}

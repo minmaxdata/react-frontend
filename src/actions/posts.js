@@ -43,6 +43,27 @@ export const editPost = post => {
     );
   };
 };
+
+export const deleteItem = id => {
+  return dispatch => {
+    dispatch(requestDeleteItem());
+    return ReadableAPI.deletePost(id).then(response =>
+      dispatch(receiveDeleteItem(response))
+    );
+  };
+};
+export const receiveDeleteItem = post => {
+  return {
+    type: types.RECEIVE_DELETE_ITEM,
+    post: post
+  };
+};
+export const requestDeleteItem = () => {
+  return {
+    type: types.REQUEST_DELETE_ITEM
+  };
+};
+
 export const receiveEditPost = post => {
   return {
     type: types.RECEIVE_EDIT_POST,

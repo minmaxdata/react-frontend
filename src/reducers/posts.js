@@ -15,6 +15,11 @@ function posts(state = [], action) {
       return [];
     case types.RECEIVE_CREATE_POST:
       return [...state, action.post];
+    case types.REQUEST_DELETE_ITEM:
+      return [];
+    case types.RECEIVE_DELETE_ITEM:
+      return state.filter(post => post.id !== action.post.id);
+
     default:
       return state;
   }
