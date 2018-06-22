@@ -3,12 +3,10 @@ import { connect } from "react-redux";
 import { deleteItem } from "./../actions/posts";
 import * as FontAwesome from "react-icons/lib/fa";
 
-const DeleteItem = (props) => {
+const DeleteItem = props => {
   const removeItem = itemId => {
-    console.log(' DeleteItem props ', props)
     props.dispatchDeleteItem(props.itemId);
   };
-
 
   return (
     <button className="btn btn-outline-primary" onClick={removeItem}>
@@ -16,12 +14,7 @@ const DeleteItem = (props) => {
     </button>
   );
 };
-function mapStateToProps(state) {
-  return {
-    posts: state.posts,
-    category: state.category
-  };
-}
+
 const mapDispatchToProps = dispatch => {
   return {
     dispatchDeleteItem: itemId => {
@@ -31,6 +24,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(DeleteItem);

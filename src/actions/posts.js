@@ -17,15 +17,6 @@ export const getPostsByCategory = category => {
     );
   };
 };
-
-export const getPostById = id => {
-  return dispatch => {
-    dispatch(requestPostById());
-    return ReadableAPI.getPostById(id).then(response =>
-      dispatch(receivePostById(response))
-    );
-  };
-};
 export const createPost = post => {
   return dispatch => {
     dispatch(requestCreatePost());
@@ -50,6 +41,26 @@ export const deleteItem = id => {
     return ReadableAPI.deletePost(id).then(response =>
       dispatch(receiveDeleteItem(response))
     );
+  };
+};
+
+export const castVote = payload => {
+  return dispatch => {
+    dispatch(requestPostVote());
+    return ReadableAPI.votePost(payload).then(response =>
+      dispatch(receivePostVote(response))
+    );
+  };
+};
+export const receivePostVote = post => {
+  return {
+    type: types.RECEIVE_POST_VOTE,
+    post: post
+  };
+};
+export const requestPostVote = () => {
+  return {
+    type: types.REQUEST_POST_VOTE
   };
 };
 export const receiveDeleteItem = post => {
@@ -86,7 +97,6 @@ export const requestCreatePost = () => {
     type: types.REQUEST_CREATE_POST
   };
 };
-
 export const receivePostById = post => {
   return {
     type: types.RECEIVE_POST_BY_ID,
@@ -122,9 +132,3 @@ export const requestPostsByCategory = () => {
     type: types.REQUEST_POSTS_BY_CATEGORY
   };
 };
-export const setCategory= category => {
-  return {
-    type: types.SET_CATEGORY,
-    category
-  }
-}

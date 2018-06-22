@@ -1,7 +1,6 @@
 import * as types from "./../actions/types";
 
 function categories(state = [], action) {
-  console.log("categories reducer ", state, action);
   switch (action.type) {
     case types.REQUEST_CATEGORIES:
       return [];

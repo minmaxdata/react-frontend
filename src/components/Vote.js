@@ -1,12 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import { castVote } from "./../actions/posts";
 import * as FontAwesome from "react-icons/lib/fa";
 
-const Vote = ({ castVote, itemId, onVote }) => {
+const Vote = ({itemId}) => {
   const voteOnItem = async payload => {
     let params = { ...payload, id: itemId };
     try {
-      await castVote(params);
-      onVote(); // callback
+      await this.dispatchCastVote(params);
     } catch (err) {
       // Handle the error
       alert(JSON.stringify(err));
@@ -33,4 +34,4 @@ const Vote = ({ castVote, itemId, onVote }) => {
     </span>
   );
 };
-export default Vote;
+export default connect()(Vote);

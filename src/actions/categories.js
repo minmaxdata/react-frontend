@@ -5,7 +5,6 @@ export const getCategories = () => {
   return dispatch => {
     dispatch(requestCategories())
     return ReadableAPI.getCategories().then(response => {
-      console.log(' get categories ', response)
       dispatch(receiveCategories(response))});
   }
 };

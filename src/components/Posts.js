@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PostsHeader from "./PostsHeader";
 import Post from "./Post";
 import { connect } from "react-redux";
-import { getAllPosts, getPostsByCategory, setCategory } from "./../actions/posts";
+import { getAllPosts, getPostsByCategory } from "./../actions/posts";
+import { setCategory } from "./../actions/category";
 import { Categories } from "./../actions/types";
 
 class Posts extends Component {
@@ -19,7 +20,6 @@ class Posts extends Component {
       } else if (nextUrl === "udacity") {
         category = Categories.SET_UDACITY;
       }
-      console.log("POSTS componentWillReceiveProps", currentUrl, nextUrl);
 
       this.props.dispatchSetCategory(category)
 
