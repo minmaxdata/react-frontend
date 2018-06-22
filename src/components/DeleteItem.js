@@ -5,9 +5,10 @@ import * as FontAwesome from "react-icons/lib/fa";
 
 const DeleteItem = (props) => {
   const removeItem = itemId => {
-    console.log('props ', props)
+    console.log(' DeleteItem props ', props)
     props.dispatchDeleteItem(props.itemId);
   };
+
 
   return (
     <button className="btn btn-outline-primary" onClick={removeItem}>

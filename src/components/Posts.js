@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import PostsHeader from "./PostsHeader";
 import Post from "./Post";
 import { connect } from "react-redux";
-import { getAllPosts, getPostsByCategory } from "./../actions/posts";
+import { getAllPosts, getPostsByCategory, setCategory } from "./../actions/posts";
 import { Categories } from "./../actions/types";
 
 class Posts extends Component {
   componentWillReceiveProps(nextProps) {
     const currentUrl = this.props.match.params.category;
     const nextUrl = nextProps.match.params.category;
-    console.log("componentWillReceiveProps ", currentUrl, nextUrl);
 
     if (currentUrl !== nextUrl) {
       let category = Categories.SET_ALL;
@@ -20,6 +19,9 @@ class Posts extends Component {
       } else if (nextUrl === "udacity") {
         category = Categories.SET_UDACITY;
       }
+      console.log("POSTS componentWillReceiveProps", currentUrl, nextUrl);
+
+      this.props.dispatchSetCategory(category)
 
       if (category !== Categories.SET_ALL) {
         this.props.dispatchGetPostsByCategory(category);
@@ -32,6 +34,7 @@ class Posts extends Component {
   componentDidMount() {
     console.log(" componentDidMount ", this.props);
     this.props.dispatchGetAllPosts();
+    this.props.dispatchSetCategory(Categories.SET_ALL)
   }
 
   render() {
@@ -54,7 +57,8 @@ class Posts extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    category: state.category
+    category: state.category,
+    categories: state.categories
   };
 }
 
@@ -65,7 +69,11 @@ const mapDispatchToProps = dispatch => {
     },
     dispatchGetPostsByCategory: category => {
       dispatch(getPostsByCategory(category));
+    },
+    dispatchSetCategory: category => {
+      dispatch(setCategory(category));
     }
+
   };
 };
 export default connect(

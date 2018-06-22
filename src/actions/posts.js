@@ -122,3 +122,9 @@ export const requestPostsByCategory = () => {
     type: types.REQUEST_POSTS_BY_CATEGORY
   };
 };
+export const setCategory= category => {
+  return {
+    type: types.SET_CATEGORY,
+    category
+  }
+}

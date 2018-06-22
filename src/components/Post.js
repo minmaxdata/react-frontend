@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import * as ReadableAPI from "../utils/api";
-import DeleteItem from "./DeleteItem";
-import EditItem from "./EditItem";
-import Vote from "./Vote";
+import PostManager from "./PostManager";
 
 class Post extends Component {
   refreshPosts = () => {
     this.props.getPosts(this.props.post.category);
   };
   deletePost = id => {
+    console.log(' delete post ', this.props)
     ReadableAPI.deletePost(id).then(response => {});
   };
   castVote = payload => {
@@ -17,43 +17,33 @@ class Post extends Component {
   };
 
   render() {
+    const post = this.props.post;
+
     return (
       <li className="row">
         <div className="col-md-7">
-          <Link to={`${this.props.post.category}/${this.props.post.id}`}>
-            {this.props.post.title}
+          <Link to={`${post.category}/${post.id}`}>
+            {post.title}
           </Link>
         </div>
         <div className="col-md-1">
-          <p className="text-center">{this.props.post.voteScore}</p>
+          <p className="text-center">{post.voteScore}</p>
         </div>
         <div className="col-md-1">
-          <p className="text-center">{this.props.post.commentCount}</p>
+          <p className="text-center">{post.commentCount}</p>
         </div>
 
         <div className="col-md-3">
-          <p className="text-center">
-            <Vote
-              itemId={this.props.post.id}
-              castVote={this.castVote}
-              onVote={this.refreshPosts}
-            />
-            <Link
-              className="btn"
-              role="button"
-              to={`/${this.props.post.category}/${this.props.post.id}/edit`}
-            >
-              <EditItem />
-            </Link>
-            <DeleteItem
-              deleteItem={this.deletePost}
-              itemId={this.props.post.id}
-              onDelete={this.refreshPosts}
-            />
-          </p>
+          <PostManager{...this.props} />
         </div>
       </li>
     );
   }
 }
-export default Post;
+function mapStateToProps(state) {
+  return {
+    posts: state.posts,
+    category: state.category
+  };
+}
+export default connect(mapStateToProps, null)(Post);
