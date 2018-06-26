@@ -1,7 +1,7 @@
 import * as types from "./../actions/types";
 
 function posts(state = [], action) {
-
+console.log('posts reducer ', state, action)
   switch (action.type) {
     case types.RECEIVE_ALL_POSTS:
       return action.posts;
@@ -10,7 +10,10 @@ function posts(state = [], action) {
     case types.RECEIVE_CREATE_POST:
       return [...state, action.post];
     case types.RECEIVE_POST_VOTE:
-      return [...state, action.post];
+      return {
+        ...state,
+        [action.post.id]: action.post
+      }
     case types.RECEIVE_DELETE_POST:
       return state.filter(post => post.id !== action.post.id);
 

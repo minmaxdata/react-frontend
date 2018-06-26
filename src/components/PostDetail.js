@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPostById, castVote } from "./../actions/post";
-import { deletePost} from "./../actions/posts";
+import { getPostById} from "./../actions/post";
+import { castVote , deletePost} from "./../actions/posts";
 import { getCommentsByPostId } from "./../actions/comments";
 import Comments from "./Comments";
 import PostManager from "./PostManager";

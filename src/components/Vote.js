@@ -3,6 +3,7 @@ import * as FontAwesome from "react-icons/lib/fa";
 
 const Vote = ({itemId, onVote}) => {
   const voteOnItem = async payload => {
+
     let params = { ...payload, id: itemId };
     try {
       await onVote(params);
