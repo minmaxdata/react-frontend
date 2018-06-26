@@ -8,6 +8,7 @@ import { Categories } from "./../actions/types";
 
 class Posts extends Component {
   componentWillReceiveProps(nextProps) {
+    console.log ('next props ', nextProps)
     const currentUrl = this.props.match.params.category;
     const nextUrl = nextProps.match.params.category;
 
