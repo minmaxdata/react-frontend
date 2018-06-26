@@ -1,6 +1,7 @@
 import * as types from "./../actions/types";
 
 function posts(state = [], action) {
+
   switch (action.type) {
     case types.RECEIVE_ALL_POSTS:
       return action.posts;

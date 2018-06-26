@@ -9,6 +9,7 @@ export const getCommentsByPostId = id => {
     );
   };
 };
+
 export const createComment = comment => {
   return dispatch => {
     dispatch(requestCreateComment());
@@ -44,6 +45,7 @@ export const castVote = payload => {
     );
   };
 };
+
 export const receiveCommentsByPostId = comments => {
   return {
     type: types.RECEIVE_COMMENTS_BY_POST_ID,

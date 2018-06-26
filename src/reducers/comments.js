@@ -7,7 +7,16 @@ function comments(state = [], action) {
     case types.RECEIVE_CREATE_COMMENT:
       return [...state, action.comment];
     case types.RECEIVE_COMMENT_VOTE:
-      return [...state, action.comment];
+      return [
+        ...state.filter(comment => comment.id !== action.comment.id),
+        action.comment
+      ];
+    case types.RECEIVE_EDIT_COMMENT:
+      return [
+        ...state.filter(comment => comment.id !== action.comment.id),
+        action.comment
+      ];
+
     case types.RECEIVE_DELETE_COMMENT:
       return state.filter(comment => comment.id !== action.comment.id);
 

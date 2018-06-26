@@ -1,11 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
-import { deleteItem } from "./../actions/posts";
 import * as FontAwesome from "react-icons/lib/fa";
 
-const DeleteItem = props => {
+const DeleteItem = ({itemId, onDelete}) => {
   const removeItem = itemId => {
-    props.dispatchDeleteItem(props.itemId);
+    onDelete(itemId);
   };
 
   return (
@@ -15,15 +13,5 @@ const DeleteItem = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchDeleteItem: itemId => {
-      dispatch(deleteItem(itemId));
-    }
-  };
-};
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DeleteItem);
+export default DeleteItem;

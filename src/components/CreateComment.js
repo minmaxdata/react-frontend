@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import serializeForm from "form-serialize";
 import uuid from "uuid";
+import { connect } from "react-redux";
+import {
+  createComment,
+  editComment
+} from "./../actions/comments";
+import { getPostById } from './../actions/post'
 import * as ReadableAPI from "../utils/api";
 
 class CreateComment extends Component {
   state = {
     author: "",
     body: "",
+    id: ""
   };
   getComment = id => {
     ReadableAPI.getComment(id)
@@ -15,23 +22,12 @@ class CreateComment extends Component {
       })
       .catch(reason => console.error(reason));
   };
-  handleCloseModal = () => {
-    console.log('close? ', this.props)
-    this.props.close();
-  }
 
   handleSubmit = e => {
     e.preventDefault();
     const values = serializeForm(e.target, { hash: true });
-    console.log('value ', values)
-    if (this.props.comment.id) {
-      let payload = { ...values, id: this.props.comment.id};
-      ReadableAPI.editComment(payload).then(response => {
-        console.log("response ", response);
-        //shut the modal and redirect to post page
-        this.handleCloseModal()
-      });
-    } else {
+    console.log("value ", values);
+    if (this.state.id === "") {
       let comment = {
         ...values,
         id: uuid(),
@@ -41,29 +37,26 @@ class CreateComment extends Component {
         deleted: false,
         parentDeleted: false
       };
-      ReadableAPI.addComment(comment).then(response => {
-        console.log("response ", response);
-        //shut the modal and redirect to post page
-          this.handleCloseModal()
-      });
+      this.props.dispatchCreateComment(comment);
+    } else {
+      let comment = { ...values, id: this.props.commentId };
+      this.props.dispatchEditComment(comment);
     }
+    this.props.dispatchGetPost(this.props.parentId)
+    this.props.close();
   };
   handleChange = event => {
-    this.setState({[event.target.name]: event.target.value});
-
+    this.setState({ [event.target.name]: event.target.value });
   };
   componentDidMount() {
-    if (this.props.comment.id) {
-      this.getComment(this.props.comment.id);
-    }
+    console.log(" create comment ", this.props);
+    this.getComment(this.props.commentId)
   }
 
   render() {
     return (
       <div>
-        <div>
-          <strong> Add Comment </strong>
-        </div>
+        <h4>Add Comment</h4>
         <form onSubmit={this.handleSubmit} className="create-contact-form">
           <div>
             <label>
@@ -88,7 +81,7 @@ class CreateComment extends Component {
             </label>
           </div>
           <div>
-            <input className='btn' type="submit" value="Submit" />
+            <input className="btn" type="submit" value="Submit" />
           </div>
         </form>
       </div>
@@ -96,4 +89,21 @@ class CreateComment extends Component {
   }
 }
 
-export default CreateComment;
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchCreateComment: comment => {
+      dispatch(createComment(comment));
+    },
+    dispatchEditComment: comment => {
+      dispatch(editComment(comment));
+    },
+    dispatchGetPost: id => {
+      dispatch(getPostById(id));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateComment);

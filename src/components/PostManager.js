@@ -7,7 +7,7 @@ import Vote from "./Vote";
 const PostManager = props => {
   return (
     <p className="text-center">
-      <Vote itemId={props.post.id} />
+      <Vote itemId={props.post.id} onVote={props.onVote}/>
       <Link
         className="btn"
         role="button"
@@ -15,7 +15,7 @@ const PostManager = props => {
       >
         <EditItem />
       </Link>
-      <DeleteItem itemId={props.post.id} />
+      <DeleteItem itemId={props.post.id} onDelete={props.deleteItem}/>
     </p>
   );
 };

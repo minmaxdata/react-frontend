@@ -1,50 +1,20 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
-import * as ReadableAPI from "../utils/api";
+import { connect } from "react-redux";
+import { getCommentsByPostId } from "./../actions/comments";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 
 class Comments extends Component {
   state = {
-    comments: [],
     showModal: false
   };
   handleOpenModal = () => {
     this.setState(() => ({ showModal: true }));
   };
   handleCloseModal = () => {
-    this.getOrRefreshComments();
     this.setState(() => ({ showModal: false }));
   };
-
-  deleteComment = id => {
-    ReadableAPI.deleteComment(id)
-      .then(response => {
-        this.getOrRefreshComments();
-      })
-      .catch(reason => console.error(reason));
-  };
-
-  editComment = () => {
-    this.handleOpenModal();
-  };
-
-  getOrRefreshComments = () => {
-    console.log("comments props ", this.props.id);
-    let id = this.props.id;
-
-    ReadableAPI.getComments(id)
-      .then(response => {
-        console.log(" comments response ", response);
-        this.setState({ comments: response });
-      })
-      .catch(reason => console.error(reason));
-  };
-
-  componentDidMount() {
-    this.getOrRefreshComments();
-  }
-
   render() {
     return (
       <div>
@@ -62,22 +32,19 @@ class Comments extends Component {
             </button>
             <Modal isOpen={this.state.showModal} ariaHideApp={false}>
               <CreateComment
-                parentId={this.props.id}
-                comment={false}
+                parentId={this.props.post.id}
                 close={this.handleCloseModal}
               />
-              <button onClick={this.handleCloseModal}>Close Modal</button>
-            </Modal>
+              </Modal>
           </div>
         </div>
+
         <ul>
-          {this.state.comments.map(comment => (
+          {this.props.comments.map(comment => (
             <Comment
               key={comment.id}
               comment={comment}
-              deleteComment={this.deleteComment}
-              editComment={this.editComment}
-              refresh={this.getOrRefreshComments}
+              post={this.props.post}
             />
           ))}
         </ul>
@@ -85,4 +52,20 @@ class Comments extends Component {
     );
   }
 }
-export default Comments;
+function mapStateToProps(state) {
+  return {
+    post: state.post,
+    comments: state.comments
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchGetCommentsByPostId: id => dispatch(getCommentsByPostId(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Comments);

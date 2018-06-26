@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import serializeForm from "form-serialize";
 import uuid from "uuid";
 import { connect } from "react-redux";
@@ -12,7 +12,6 @@ class CreatePost extends Component {
     author: "",
     category: "react",
     body: "",
-    submitted: false
   };
 
   handleChange = event => {
@@ -26,7 +25,6 @@ class CreatePost extends Component {
       .catch(reason => console.error(reason));
   };
   handleSubmit = e => {
-    console.log(" state", this.state);
     e.preventDefault();
 
     const values = serializeForm(e.target, { hash: true });
@@ -42,9 +40,7 @@ class CreatePost extends Component {
       };
       this.props.dispatchCreatePost(post);
     }
-    this.setState(() => ({
-      submitted: true
-    }));
+    this.props.history.goBack();
   };
 
   componentDidMount() {
@@ -57,9 +53,7 @@ class CreatePost extends Component {
   }
 
   render() {
-    if (this.state.submitted) {
-      return <Redirect to="/" />;
-    } else {
+
       return (
         <div>
           <Link className="btn " to="/">
@@ -120,7 +114,7 @@ class CreatePost extends Component {
         </div>
       );
     }
-  }
+
 }
 function mapStateToProps({ posts }, { categories }) {
   return {

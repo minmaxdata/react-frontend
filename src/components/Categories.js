@@ -12,9 +12,7 @@ class Categories extends Component {
   };
 
   componentDidMount() {
-    console.log(' categories componentDidMount ', this.props)
     this.props.dispatchGetCategories();
-
   }
 
   render() {
@@ -22,10 +20,14 @@ class Categories extends Component {
       <div>
         <ul className="categories">
           <li>
-            <NavLink activeClassName="active" className='btn' to="/create">Add a Post</NavLink>
+            <NavLink activeClassName="active" className="btn" to="/create">
+              Add a Post
+            </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="active"  className='btn' to="/">All Posts</NavLink>
+            <NavLink activeClassName="active" className="btn" to="/">
+              All Posts
+            </NavLink>
           </li>
           {this.props.categories.map(category => (
             <Category key={category.name} category={category} />
@@ -35,7 +37,7 @@ class Categories extends Component {
     );
   }
 }
-function mapStateToProps({categories}) {
+function mapStateToProps({ categories }) {
   return {
     categories
   };

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Modal from "react-modal";
 import * as FontAwesome from "react-icons/lib/fa";
-import * as ReadableAPI from "../utils/api";
+import { castVote, deleteComment } from "./../actions/comments";
+import { getPostById } from "./../actions/post";
 import CreateComment from "./CreateComment";
 import Vote from "./Vote";
 
@@ -9,23 +11,21 @@ class Comment extends Component {
   state = {
     showModal: false
   };
+  handleOpenModal = () => {
+    this.setState(() => ({ showModal: true }));
+  };
+  handleCloseModal = () => {
+    this.setState(() => ({ showModal: false }));
+  };
+
   deleteComment = () => {
     let id = this.props.comment.id;
-    this.props.deleteComment(id);
+    this.props.dispatchDeleteComment(id);
   };
-  openEditModal = () => {
-    this.setState({ showModal: true });
+  castVote = payload => {
+    console.log("vote payload ", payload);
+    this.props.dispatchCastVote(payload);
   };
-  closeEditModal = () => {
-    this.setState({ showModal: false });
-    this.props.refresh();
-  };
-  castVote = (payload) => {
-    ReadableAPI.voteComment(payload).then(response => {});
-  };
-  onVote = () => {
-    this.props.refresh();
-  }
 
   render() {
     return (
@@ -36,18 +36,22 @@ class Comment extends Component {
           <div>VoteScore: {this.props.comment.voteScore}</div>
         </div>
         <div className="col-md-3">
-          <Vote
-            castVote={this.castVote}
-            itemId={this.props.comment.id}
-            onVote={this.onVote}
-          />
+          <Vote itemId={this.props.comment.id} onVote={this.castVote} />
 
           <button
             className="btn btn-outline-primary"
-            onClick={this.openEditModal}
+            onClick={this.handleOpenModal}
           >
             <FontAwesome.FaEdit />
           </button>
+          <Modal isOpen={this.state.showModal} ariaHideApp={false}>
+            <CreateComment
+              parentId={this.props.post.id}
+              close={this.handleCloseModal}
+              commentId={this.props.comment.id}
+            />
+          </Modal>
+
           <button
             className="btn btn-outline-primary"
             onClick={this.deleteComment}
@@ -55,20 +59,26 @@ class Comment extends Component {
             <FontAwesome.FaTimesCircle />
           </button>
         </div>
-        <Modal isOpen={this.state.showModal} ariaHideApp={false}>
-          <CreateComment
-            comment={this.props.comment}
-            close={this.closeEditModal}
-          />
-          <button
-            className="btn btn-outline-primary"
-            onClick={this.closeEditModal}
-          >
-            Close Modal
-          </button>
-        </Modal>
       </li>
     );
   }
 }
-export default Comment;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchDeleteComment: id => {
+      dispatch(deleteComment(id));
+    },
+    dispatchCastVote: payload => {
+      dispatch(castVote(payload));
+    },
+    dispatchGetPost: comment => {
+      dispatch(getPostById(comment));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Comment);

@@ -17,9 +17,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/create" component={props => <CreatePost {...props} />} />
           <Route exact path="/" component={props => <Posts {...props} />} />
+          <Route exact path="/comment/:cid" component={props => <CreateComment {...props} />} />
           <Route exact path="/:category" component={props => <Posts {...props} />} />
           <Route exact path="/:category/:id" component={props => <PostDetail {...props} />} />
           <Route path="/:category/:id/edit" component={props => <CreatePost {...props} />} />
+          <Route exact path="/:category/:id/comment/:cid" component={props => <CreateComment {...props} />} />
           <Route component={GenericNotFound} />
         </Switch>
       </div>

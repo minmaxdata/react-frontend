@@ -32,7 +32,6 @@ class Posts extends Component {
   }
 
   componentDidMount() {
-    console.log(" componentDidMount ", this.props);
     this.props.dispatchGetAllPosts();
     this.props.dispatchSetCategory(Categories.SET_ALL)
   }

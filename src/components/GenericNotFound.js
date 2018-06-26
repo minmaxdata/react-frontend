@@ -1,8 +1,5 @@
-
-export const GenericNotFound = ({ location }) => {
-  render(){
-       return(
-           <h1>{location.pathname} Not Found</h1>
-       )
-   }
-}
+import React from "react";
+const GenericNotFound = () => {
+  return <h1> Page Not Found</h1>;
+};
+export default GenericNotFound
