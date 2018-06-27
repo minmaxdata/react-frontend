@@ -19,7 +19,6 @@ function posts(state = [], action) {
           ...action.post
         };
       });
-      return state;
     case types.RECEIVE_DELETE_POST:
       return state.filter(post => post.id !== action.post.id);
 

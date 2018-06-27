@@ -17,6 +17,8 @@ class Categories extends Component {
 
   render() {
     return (
+      <div className="nav">
+      <NavLink activeClassName="active"  to='/'>  <h3 className="header">Readable</h3></NavLink>
       <div>
         <ul className="categories">
           <li>
@@ -33,6 +35,7 @@ class Categories extends Component {
             <Category key={category.name} category={category} />
           ))}
         </ul>
+      </div>
       </div>
     );
   }

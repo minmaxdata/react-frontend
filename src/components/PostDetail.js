@@ -14,13 +14,17 @@ class PostDetail extends Component {
     this.props.dispatchGetPostById(id);
     this.props.dispatchGetCommentsByPostId(id);
   }
+
+
   deletePost = () => {
     let id = this.props.match.params.id;
     this.props.dispatchDeletePost(id);
     this.props.history.push("/");
   };
   votePost = payload => {
+      let id = this.props.match.params.id;
     this.props.dispatchCastVote(payload);
+    this.props.dispatchGetPostById(id);
   };
 
   render() {
