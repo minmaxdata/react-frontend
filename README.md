@@ -1,5 +1,12 @@
 Project: Readable
 
+* Install dependencies
+    - `npm install`
+    - `npm start`
+* Start the server
+    - `cd api-server`
+    - `node server`    
+
 Concepts
 Resources
 Search
