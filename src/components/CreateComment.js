@@ -45,7 +45,6 @@ class CreateComment extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   componentDidMount() {
-    console.log(" create comment ", this.props);
     this.getComment(this.props.commentId);
   }
 
