@@ -6,12 +6,10 @@ import PostManager from "./PostManager";
 
 const Post = props => {
   const deletePost = () => {
-    console.log('post props ', props)
     let id = props.post.id;
     props.dispatchDeletePost(id);
   };
   const votePost = payload => {
-    console.log('post props ', payload)
     props.dispatchCastVote(payload);
   };
 
@@ -21,6 +19,7 @@ const Post = props => {
         <Link to={`${props.post.category}/${props.post.id}`}>
           {props.post.title}
         </Link>
+        <p className="text-left">{props.post.author}</p>
       </div>
       <div className="col-md-1">
         <p className="text-center">{props.post.voteScore}</p>
@@ -43,6 +42,7 @@ const Post = props => {
 function mapStateToProps(state) {
   return {
     posts: state.posts,
+    loading: state.loading
   };
 }
 

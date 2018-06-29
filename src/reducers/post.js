@@ -1,12 +1,14 @@
 import * as types from "./../actions/types";
 
-function post(state = [], action) {
+export default function(state = [], action) {
   switch (action.type) {
-    case types.RECEIVE_POST_BY_ID:
+    case types.LOAD_POST_BY_ID_SUCCESS:
       return action.post;
+    case types.LOAD_POST_BY_ID_REQUEST:
+      return {};
+    case types.LOAD_POST_BY_ID_FAILURE:
+      return {};
     default:
       return state;
   }
 }
-
-export default post;

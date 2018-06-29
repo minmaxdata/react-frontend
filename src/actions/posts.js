@@ -3,132 +3,132 @@ import * as ReadableAPI from "../utils/api";
 
 export const getAllPosts = () => {
   return dispatch => {
-    dispatch(requestAllPosts());
+    dispatch(loadPostsRequest());
     return ReadableAPI.getPosts().then(response =>
-      dispatch(receiveAllPosts(response))
+      dispatch(loadPostsSuccess(response))
     );
   };
 };
 export const getPostsByCategory = category => {
   return dispatch => {
-    dispatch(requestPostsByCategory());
+    dispatch(loadtPostsByCategoryRequest());
     return ReadableAPI.getPostsByCategory(category).then(response =>
-      dispatch(receivePostsByCategory(response))
+      dispatch(loadPostsByCategorySuccess(response))
     );
   };
 };
 export const createPost = post => {
   return dispatch => {
-    dispatch(requestCreatePost());
+    dispatch(createPostRequest());
     return ReadableAPI.addPost(post).then(response =>
-      dispatch(receiveCreatePost(response))
+      dispatch(createPostSuccess(response))
     );
   };
 };
 
 export const editPost = post => {
   return dispatch => {
-    dispatch(requestEditPost());
+    dispatch(editPostRequest());
     return ReadableAPI.editPost(post).then(response =>
-      dispatch(receiveEditPost(response))
+      dispatch(editPostSuccess(response))
     );
   };
 };
 
 export const deletePost = id => {
   return dispatch => {
-    dispatch(requestDeletePost());
+    dispatch(deletePostRequest());
     return ReadableAPI.deletePost(id).then(response =>
-      dispatch(receiveDeletePost(response))
+      dispatch(deletePostSuccess(response))
     );
   };
 };
 
 export const castVote = payload => {
   return dispatch => {
-    dispatch(requestPostVote());
+    dispatch(postVoteRequest());
     return ReadableAPI.votePost(payload).then(response =>
-      dispatch(receivePostVote(response))
+      dispatch(postVoteSuccess(response))
     );
   };
 };
-export const receivePostVote = post => {
+export const postVoteSuccess = post => {
   return {
-    type: types.RECEIVE_POST_VOTE,
+    type: types.POST_VOTE_SUCCESS,
     post: post
   };
 };
-export const requestPostVote = () => {
+export const postVoteRequest = () => {
   return {
-    type: types.REQUEST_POST_VOTE
+    type: types.POST_VOTE_REQUEST
   };
 };
-export const receiveDeletePost = post => {
+export const deletePostSuccess = post => {
   return {
-    type: types.RECEIVE_DELETE_POST,
+    type: types.DELETE_POST_SUCCESS,
     post: post
   };
 };
-export const requestDeletePost = () => {
+export const deletePostRequest = () => {
   return {
-    type: types.REQUEST_DELETE_POST
+    type: types.DELETE_POST_REQUEST
   };
 };
 
-export const receiveEditPost = post => {
+export const editPostSuccess = post => {
   return {
-    type: types.RECEIVE_EDIT_POST,
+    type: types.EDIT_POST_SUCCESS,
     post: post
   };
 };
-export const requestEditPost = () => {
+export const editPostRequest = () => {
   return {
-    type: types.REQUEST_EDIT_POST
+    type: types.EDIT_POST_REQUEST
   };
 };
-export const receiveCreatePost = post => {
+export const createPostSuccess = post => {
   return {
-    type: types.RECEIVE_CREATE_POST,
+    type: types.CREATE_POST_SUCCESS,
     post: post
   };
 };
-export const requestCreatePost = () => {
+export const createPostRequest = () => {
   return {
-    type: types.REQUEST_CREATE_POST
+    type: types.CREATE_POST_REQUEST
   };
 };
-export const receivePostById = post => {
+export const loadPostById = post => {
   return {
-    type: types.RECEIVE_POST_BY_ID,
+    type: types.LOAD_POST_BY_ID_SUCCESS,
     post: post
   };
 };
-export const requestPostById = () => {
+export const loadPostByIdRequest = () => {
   return {
-    type: types.REQUEST_POST_BY_ID
+    type: types.LOAD_POST_BY_ID_REQUEST
   };
 };
 
-export const receiveAllPosts = posts => {
+export const loadPostsSuccess = posts => {
   return {
-    type: types.RECEIVE_ALL_POSTS,
+    type: types.LOAD_POSTS_SUCCESS,
     posts: posts
   };
 };
-export const requestAllPosts = () => {
+export const loadPostsRequest = () => {
   return {
-    type: types.REQUEST_ALL_POSTS
+    type: types.LOAD_POSTS_REQUEST
   };
 };
 
-export const receivePostsByCategory = posts => {
+export const loadPostsByCategorySuccess = posts => {
   return {
-    type: types.RECEIVE_POSTS_BY_CATEGORY,
+    type: types.LOAD_POSTS_BY_CATEGORY_SUCCESS,
     posts: posts
   };
 };
-export const requestPostsByCategory = () => {
+export const loadtPostsByCategoryRequest = () => {
   return {
-    type: types.REQUEST_POSTS_BY_CATEGORY
+    type: types.LOAD_POSTS_BY_CATEGORY_REQUEST
   };
 };

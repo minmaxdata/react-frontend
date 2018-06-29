@@ -1,22 +1,23 @@
-import * as types from './types';
+import * as types from "./types";
 import * as ReadableAPI from "../utils/api";
 
 export const getCategories = () => {
   return dispatch => {
-    dispatch(requestCategories())
+    dispatch(loadCategoriesRequest());
     return ReadableAPI.getCategories().then(response => {
-      dispatch(receiveCategories(response))});
-  }
+      dispatch(loadCategoriesSuccess(response));
+    });
+  };
 };
 
-export const receiveCategories = categories => {
+export const loadCategoriesSuccess = categories => {
   return {
-    type: types.RECEIVE_CATEGORIES,
+    type: types.LOAD_CATEGORIES_SUCCESS,
     categories: categories
   };
 };
-export const requestCategories= () => {
+export const loadCategoriesRequest = () => {
   return {
-    type: types.REQUEST_CATEGORIES
-  }
-}
+    type: types.LOAD_CATEGORIES_REQUEST
+  };
+};

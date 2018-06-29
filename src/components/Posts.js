@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { getAllPosts, getPostsByCategory } from "./../actions/posts";
 import { setCategory } from "./../actions/category";
 import { Categories } from "./../actions/types";
+import arraySort from "array-sort";
 
 class Posts extends Component {
   componentWillReceiveProps(nextProps) {
-    console.log ('next props ', nextProps)
     const currentUrl = this.props.match.params.category;
     const nextUrl = nextProps.match.params.category;
 
@@ -22,32 +22,58 @@ class Posts extends Component {
         category = Categories.SET_UDACITY;
       }
 
-      this.props.dispatchSetCategory(category)
+      this.setCategory(category);
 
       if (category !== Categories.SET_ALL) {
-        this.props.dispatchGetPostsByCategory(category);
+        this.getPostsByCategory(category);
       } else {
-        this.props.dispatchGetAllPosts();
+        this.getAllPosts();
       }
     }
   }
-
+  getPostsByCategory = async category => {
+    try {
+      await this.props.dispatchGetPostsByCategory(category);
+    } catch (err) {
+      // Handle the error
+      alert(JSON.stringify(err));
+    }
+  };
+  getAllPosts = async () => {
+    try {
+      await this.props.dispatchGetAllPosts();
+    } catch (err) {
+      // Handle the error
+      alert(JSON.stringify(err));
+    }
+  };
+  setCategory = async category => {
+    try {
+      await this.props.dispatchSetCategory(category);
+    } catch (err) {
+      // Handle the error
+      alert(JSON.stringify(err));
+    }
+  };
+  sortPostsByVotes = () => {
+    const sortPostsByVotes = arraySort(this.props.posts, "voteScore", {
+      reverse: true
+    });
+    return sortPostsByVotes;
+  };
   componentDidMount() {
-    this.props.dispatchGetAllPosts();
-    this.props.dispatchSetCategory(Categories.SET_ALL)
+    this.getAllPosts();
+    this.setCategory(Categories.SET_ALL);
   }
 
   render() {
     return (
       <div>
-        <PostsHeader />
+        <PostsHeader sort={this.sortPostsByVotes} />
+        {this.props.loading ? "Loading..." : ""}
         <ul className="">
-          {this.props.posts.map(post => (
-            <Post
-              key={post.id}
-              post={post}
-              itemId={post.id}
-            />
+          {this.sortPostsByVotes(this.props.posts).map(post => (
+            <Post key={post.id} post={post} itemId={post.id} />
           ))}
         </ul>
       </div>
@@ -58,7 +84,9 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     category: state.category,
-    categories: state.categories
+    categories: state.categories,
+    loading: state.loading,
+    error: state.error
   };
 }
 
@@ -73,7 +101,6 @@ const mapDispatchToProps = dispatch => {
     dispatchSetCategory: category => {
       dispatch(setCategory(category));
     }
-
   };
 };
 export default connect(

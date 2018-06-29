@@ -3,113 +3,113 @@ import * as ReadableAPI from "../utils/api";
 
 export const getCommentsByPostId = id => {
   return dispatch => {
-    dispatch(requestCommentsByPostId());
+    dispatch(commentsByPostIdRequest());
     return ReadableAPI.getComments(id).then(response =>
-      dispatch(receiveCommentsByPostId(response))
+      dispatch(commentsByPostIdSuccess(response))
     );
   };
 };
 
 export const createComment = comment => {
   return dispatch => {
-    dispatch(requestCreateComment());
+    dispatch(createCommentRequest());
     return ReadableAPI.addComment(comment).then(response =>
-      dispatch(receiveCreateComment(response))
+      dispatch(createCommentSuccess(response))
     );
   };
 };
 
 export const editComment = comment => {
   return dispatch => {
-    dispatch(requestEditComment());
+    dispatch(editCommentRequest());
     return ReadableAPI.editComment(comment).then(response =>
-      dispatch(receiveEditComment(response))
+      dispatch(editCommentSuccess(response))
     );
   };
 };
 
 export const deleteComment = id => {
   return dispatch => {
-    dispatch(requestDeleteComment());
+    dispatch(deleteCommentRequest());
     return ReadableAPI.deleteComment(id).then(response =>
-      dispatch(receiveDeleteComment(response))
+      dispatch(deleteCommentSuccess(response))
     );
   };
 };
 
 export const castVote = payload => {
   return dispatch => {
-    dispatch(requestCommentVote());
+    dispatch(commentVoteRequest());
     return ReadableAPI.voteComment(payload).then(response =>
-      dispatch(receiveCommentVote(response))
+      dispatch(commentVoteSuccess(response))
     );
   };
 };
 
-export const receiveCommentsByPostId = comments => {
+export const commentsByPostIdSuccess = comments => {
   return {
-    type: types.RECEIVE_COMMENTS_BY_POST_ID,
+    type: types.LOAD_COMMENTS_BY_POST_ID_SUCCESS,
     comments: comments
   };
 };
-export const requestCommentsByPostId = () => {
+export const commentsByPostIdRequest = () => {
   return {
-    type: types.REQUEST_COMMENTS_BY_POST_ID
+    type: types.LOAD_COMMENTS_BY_POST_ID_REQUEST
   };
 };
-export const receiveCommentVote = comment => {
+export const commentVoteSuccess = comment => {
   return {
-    type: types.RECEIVE_COMMENT_VOTE,
+    type: types.COMMENT_VOTE_SUCCESS,
     comment: comment
   };
 };
-export const requestCommentVote = () => {
+export const commentVoteRequest = () => {
   return {
-    type: types.REQUEST_COMMENT_VOTE
+    type: types.COMMENT_VOTE_REQUEST
   };
 };
-export const receiveDeleteComment = comment => {
+export const deleteCommentSuccess = comment => {
   return {
-    type: types.RECEIVE_DELETE_COMMENT,
+    type: types.DELETE_COMMENT_SUCCESS,
     comment: comment
   };
 };
-export const requestDeleteComment = () => {
+export const deleteCommentRequest = () => {
   return {
-    type: types.REQUEST_DELETE_COMMENT
+    type: types.DELETE_COMMENT_REQUEST
   };
 };
 
-export const receiveEditComment = comment => {
+export const editCommentSuccess = comment => {
   return {
-    type: types.RECEIVE_EDIT_COMMENT,
+    type: types.EDIT_COMMENT_SUCCESS,
     comment: comment
   };
 };
-export const requestEditComment = () => {
+export const editCommentRequest = () => {
   return {
-    type: types.REQUEST_EDIT_COMMENT
+    type: types.EDIT_COMMENT_REQUEST
   };
 };
-export const receiveCreateComment = comment => {
+export const createCommentSuccess = comment => {
   return {
-    type: types.RECEIVE_CREATE_COMMENT,
+    type: types.CREATE_COMMENT_SUCCESS,
     comment: comment
   };
 };
-export const requestCreateComment = () => {
+export const createCommentRequest = () => {
   return {
-    type: types.REQUEST_CREATE_COMMENT
+    type: types.CREATE_COMMENT_REQUEST
   };
 };
-export const receiveCommentById = comment => {
+export const commentByIdSuccess = comment => {
   return {
-    type: types.RECEIVE_COMMENT_BY_ID,
+    type: types.LOAD_COMMENT_BY_ID_SUCCESS,
     comment: comment
   };
 };
-export const requestCommentById = () => {
+export const commentByIdRequest = () => {
   return {
-    type: types.REQUEST_COMMENT_BY_ID
+    type: types.LOAD_COMMENT_BY_ID_REQUEST
   };
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const PostsHeader = () => {
+const PostsHeader = ({sort}) => {
   return (
     <ul className="">
       <li className="row">
@@ -8,7 +8,14 @@ const PostsHeader = () => {
           <p className="text-left">Title</p>
         </div>
         <div className="col-md-1">
-          <p className="text-center">Votes</p>
+          <p className="text-center"><button
+            className='btn'
+            onClick={() => {
+              sort();
+            }}
+          >
+            Votes
+          </button></p>
         </div>
         <div className="col-md-1">
           <p className="text-center">Comments</p>

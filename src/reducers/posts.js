@@ -1,15 +1,14 @@
 import * as types from "./../actions/types";
 
 function posts(state = [], action) {
-  console.log("posts reducer ", state, action);
   switch (action.type) {
-    case types.RECEIVE_ALL_POSTS:
+    case types.LOAD_POSTS_SUCCESS:
       return action.posts;
-    case types.RECEIVE_POSTS_BY_CATEGORY:
+    case types.LOAD_POSTS_BY_CATEGORY_SUCCESS:
       return action.posts;
-    case types.RECEIVE_CREATE_POST:
+    case types.CREATE_POST_SUCCESS:
       return [...state, action.post];
-    case types.RECEIVE_POST_VOTE:
+    case types.POST_VOTE_SUCCESS:
       return state.map(post => {
         if (post.id !== action.post.id) {
           return post;
@@ -19,7 +18,7 @@ function posts(state = [], action) {
           ...action.post
         };
       });
-    case types.RECEIVE_DELETE_POST:
+    case types.DELETE_POST_SUCCESS:
       return state.filter(post => post.id !== action.post.id);
 
     default:

@@ -5,6 +5,7 @@ import Categories from "../components/Categories";
 import Posts from "../components/Posts";
 import CreatePost from "../components/CreatePost";
 import PostDetail from "../components/PostDetail";
+import GenericNotFound from "../components/GenericNotFound";
 
 class App extends Component {
   render() {
@@ -12,11 +13,12 @@ class App extends Component {
       <div className="container">
         <Categories />
         <Switch>
-          <Route path="/create" component={CreatePost} />
           <Route exact path="/" component={Posts} />
-          <Route exact path="/:category/:id" component={PostDetail} />
+          <Route path="/create" component={CreatePost} />
           <Route exact path="/:category/:id/edit" component={CreatePost} />
+          <Route exact path="/:category/:id" component={PostDetail} />
           <Route exact path="/:category" component={Posts} />
+          <Route path="*" component={GenericNotFound} />
         </Switch>
       </div>
     );

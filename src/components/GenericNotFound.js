@@ -1,5 +1,9 @@
 import React from "react";
-const GenericNotFound = () => {
-  return <h1> Page Not Found</h1>;
-};
-export default GenericNotFound
+import { Link } from "react-router-dom";
+const GenericNotFound = () => (
+  <div>
+    <h1> Page Not Found</h1>
+     Return to <Link to="/">Homepage</Link>
+  </div>
+);
+export default GenericNotFound;

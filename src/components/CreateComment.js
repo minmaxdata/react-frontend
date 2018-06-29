@@ -26,7 +26,6 @@ class CreateComment extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const values = serializeForm(e.target, { hash: true });
-    console.log("value ", values);
     if (this.state.id === "") {
       let comment = {
         ...values,
@@ -81,7 +80,7 @@ class CreateComment extends Component {
             </label>
           </div>
           <div>
-            <input className="btn" type="submit" value="Submit" />
+            <input  className="btn btn-outline-primary" type="submit" value="Submit" />
           </div>
         </form>
       </div>

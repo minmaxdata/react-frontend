@@ -10,10 +10,9 @@ class CreatePost extends Component {
   state = {
     title: "",
     author: "",
-    category: "react",
+    category: "",
     body: "",
   };
-
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -49,10 +48,10 @@ class CreatePost extends Component {
     if (typeof id !== typeof undefined) {
       this.getPostById(id);
     }
-    console.log("edit post  ", id, this.state);
   }
 
   render() {
+    const isEnabled = this.state.category.length > 0;
 
       return (
         <div>
@@ -92,6 +91,7 @@ class CreatePost extends Component {
                 value={this.state.category}
                 onChange={this.handleChange}
               >
+              <option value="">Select Category</option>
                 <option value="react">React</option>
                 <option value="redux">Redux</option>
                 <option value="udacity">Udacity</option>
@@ -108,7 +108,7 @@ class CreatePost extends Component {
               </label>
             </div>
             <div>
-              <input className="btn" type="submit" value="Submit" />
+              <input disabled={!isEnabled} className="btn btn-outline-primary"  type="submit" value="Submit" />
             </div>
           </form>
         </div>
