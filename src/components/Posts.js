@@ -80,15 +80,6 @@ class Posts extends Component {
     );
   }
 }
-function mapStateToProps(state) {
-  return {
-    posts: state.posts,
-    category: state.category,
-    categories: state.categories,
-    loading: state.loading,
-    error: state.error
-  };
-}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -103,6 +94,12 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
+function mapStateToProps({ posts }) {
+  return {
+    posts
+  };
+}
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

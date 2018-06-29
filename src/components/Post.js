@@ -38,20 +38,19 @@ const Post = props => {
     </li>
   );
 };
-
-function mapStateToProps(state) {
-  return {
-    posts: state.posts,
-    loading: state.loading
-  };
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     dispatchDeletePost: id => dispatch(deletePost(id)),
     dispatchCastVote: payload => dispatch(castVote(payload))
   };
 };
+function mapStateToProps({ posts }, { loading }) {
+  return {
+    posts,
+    loading
+  };
+}
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

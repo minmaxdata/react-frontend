@@ -1,14 +1,14 @@
 import React from "react";
 
-const PostBody = post => {
+const PostBody = props => {
   return (
     <li className="col-md-9">
-      <div>Title: {post}</div>
-      <div>Author: {post}</div>
-      <div>Category: {post}</div>
-      <div>Body: {post}</div>
-      <div>VoteScore: {post}</div>
-      <div>Comment Count: {post}</div>
+      <div>Title: {props.post.title}</div>
+      <div>Author: {props.post.author}</div>
+      <div>Category: {props.post.category}</div>
+      <div>Body: {props.post.body}</div>
+      <div>VoteScore: {props.post.voteScore}</div>
+      <div>Comment Count: {props.post.commentCount}</div>
     </li>
   );
 };

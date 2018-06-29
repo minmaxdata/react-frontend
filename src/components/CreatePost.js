@@ -11,7 +11,7 @@ class CreatePost extends Component {
     title: "",
     author: "",
     category: "",
-    body: "",
+    body: ""
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -53,74 +53,72 @@ class CreatePost extends Component {
   render() {
     const isEnabled = this.state.category.length > 0;
 
-      return (
-        <div>
-          <Link className="btn " to="/">
-            Return to main page
-          </Link>
-          <form onSubmit={this.handleSubmit} className="create-contact-form">
-            <div>
-              <label>
-                Title:
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Title"
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-            <div>
-              <label>
-                Author:
-                <input
-                  type="text"
-                  name="author"
-                  placeholder="Author"
-                  value={this.state.author}
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-
-            <div>
-              Category:
-              <select
-                name="category"
-                value={this.state.category}
+    return (
+      <div>
+        <Link className="btn " to="/">
+          Return to main page
+        </Link>
+        <form onSubmit={this.handleSubmit} className="create-contact-form">
+          <div>
+            <label>
+              Title:
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                value={this.state.title}
                 onChange={this.handleChange}
-              >
-              <option value="">Select Category</option>
-                <option value="react">React</option>
-                <option value="redux">Redux</option>
-                <option value="udacity">Udacity</option>
-              </select>
-            </div>
-            <div>
-              <label>
-                <div>Body:</div>
-                <textarea
-                  name="body"
-                  value={this.state.body}
-                  onChange={this.handleChange}
-                />
-              </label>
-            </div>
-            <div>
-              <input disabled={!isEnabled} className="btn btn-outline-primary"  type="submit" value="Submit" />
-            </div>
-          </form>
-        </div>
-      );
-    }
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              Author:
+              <input
+                type="text"
+                name="author"
+                placeholder="Author"
+                value={this.state.author}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
 
-}
-function mapStateToProps({ posts }, { categories }) {
-  return {
-    posts,
-    categories
-  };
+          <div>
+            Category:
+            <select
+              name="category"
+              value={this.state.category}
+              onChange={this.handleChange}
+            >
+              <option value="">Select Category</option>
+              <option value="react">React</option>
+              <option value="redux">Redux</option>
+              <option value="udacity">Udacity</option>
+            </select>
+          </div>
+          <div>
+            <label>
+              <div>Body:</div>
+              <textarea
+                name="body"
+                value={this.state.body}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div>
+            <input
+              disabled={!isEnabled}
+              className="btn btn-outline-primary"
+              type="submit"
+              value="Submit"
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -133,7 +131,12 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-
+function mapStateToProps({ posts }, { categories }) {
+  return {
+    posts,
+    categories
+  };
+}
 export default connect(
   mapStateToProps,
   mapDispatchToProps

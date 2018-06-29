@@ -27,7 +27,7 @@ class PostDetail extends Component {
   };
 
   render() {
-    if (this.props.error !== null) return <GenericNotFound />;
+    if (this.props.post.error) return <GenericNotFound />;
     return (
       <div>
         <ul className="row">
@@ -35,7 +35,7 @@ class PostDetail extends Component {
             <h4>Post</h4>
           </li>
         </ul>
-
+        {this.props.loading ? "Loading..." : ""}
         <ul className="row">
           <PostBody post={this.props.post} />
           <li className="col-md-3">
@@ -58,8 +58,8 @@ function mapStateToProps(state) {
   return {
     posts: state.posts,
     post: state.post,
-    comments: state.comments,
-    loading: state.loading
+    loading: state.loading,
+    comments: state.comments
   };
 }
 

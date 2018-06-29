@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import serializeForm from "form-serialize";
 import uuid from "uuid";
 import { connect } from "react-redux";
-import {
-  createComment,
-  editComment
-} from "./../actions/comments";
-import { getPostById } from './../actions/post'
+import { createComment, editComment } from "./../actions/comments";
+import { getPostById } from "./../actions/post";
 import * as ReadableAPI from "../utils/api";
 
 class CreateComment extends Component {
@@ -41,7 +38,7 @@ class CreateComment extends Component {
       let comment = { ...values, id: this.props.commentId };
       this.props.dispatchEditComment(comment);
     }
-    this.props.dispatchGetPost(this.props.parentId)
+    this.props.dispatchGetPost(this.props.parentId);
     this.props.close();
   };
   handleChange = event => {
@@ -49,7 +46,7 @@ class CreateComment extends Component {
   };
   componentDidMount() {
     console.log(" create comment ", this.props);
-    this.getComment(this.props.commentId)
+    this.getComment(this.props.commentId);
   }
 
   render() {
@@ -80,7 +77,11 @@ class CreateComment extends Component {
             </label>
           </div>
           <div>
-            <input  className="btn btn-outline-primary" type="submit" value="Submit" />
+            <input
+              className="btn btn-outline-primary"
+              type="submit"
+              value="Submit"
+            />
           </div>
         </form>
       </div>

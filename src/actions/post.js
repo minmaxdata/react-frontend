@@ -3,30 +3,20 @@ import * as ReadableAPI from "../utils/api";
 
 export const getPostById = id => {
   return dispatch => {
-    dispatch(loadPostByIdRequest());
-    return ReadableAPI.getPostById(id).then(response => {
-      if (response.error) {
-        dispatch(loadPostByIdFailure(response));
-      } else {
-        dispatch(loadPostByIdSuccess(response));
-      }
-    });
+    dispatch(requestPostById());
+    return ReadableAPI.getPostById(id).then(response =>
+      dispatch(receivePostById(response))
+    );
   };
 };
-export const loadPostByIdSuccess = post => {
+export const receivePostById = post => {
   return {
     type: types.LOAD_POST_BY_ID_SUCCESS,
     post: post
   };
 };
-export const loadPostByIdRequest = () => {
+export const requestPostById = () => {
   return {
     type: types.LOAD_POST_BY_ID_REQUEST
-  };
-};
-export const loadPostByIdFailure = error => {
-  return {
-    type: types.LOAD_POST_BY_ID_FAILURE,
-    error: error
   };
 };
