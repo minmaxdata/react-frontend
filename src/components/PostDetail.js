@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPostById } from "./../actions/post";
-import { castVote, deletePost } from "./../actions/posts";
-import { getCommentsByPostId } from "./../actions/comments";
+import * as postActions from "./../actions/post";
+import * as postsActions from "./../actions/posts";
+import * as commentsActions from "./../actions/comments";
 import Comments from "./Comments";
 import PostManager from "./PostManager";
 import PostBody from "./PostBody";
@@ -11,19 +11,19 @@ import GenericNotFound from "./GenericNotFound";
 class PostDetail extends Component {
   componentDidMount() {
     let id = this.props.match.params.id;
-    this.props.dispatchGetPostById(id);
-    this.props.dispatchGetCommentsByPostId(id);
+    this.props.getPostById(id);
+    this.props.getCommentsByPostId(id);
   }
 
   deletePost = () => {
     let id = this.props.match.params.id;
-    this.props.dispatchDeletePost(id);
+    this.props.deletePost(id);
     this.props.history.push("/");
   };
   votePost = payload => {
     let id = this.props.match.params.id;
-    this.props.dispatchCastVote(payload);
-    this.props.dispatchGetPostById(id);
+    this.props.castVote(payload);
+    this.props.getPostById(id);
   };
 
   render() {
@@ -63,17 +63,7 @@ function mapStateToProps({ posts, post, loading, comments }) {
   };
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchGetPostById: id => {
-      dispatch(getPostById(id));
-    },
-    dispatchGetCommentsByPostId: id => dispatch(getCommentsByPostId(id)),
-    dispatchDeletePost: id => dispatch(deletePost(id)),
-    dispatchCastVote: payload => dispatch(castVote(payload))
-  };
-};
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { postActions, postsActions, commentsActions }
 )(PostDetail);

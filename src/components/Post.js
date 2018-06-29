@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deletePost, castVote } from "./../actions/posts";
+import * as postsActions from "./../actions/posts";
 import PostManager from "./PostManager";
 
 const Post = props => {
   const deletePost = () => {
     let id = props.post.id;
-    props.dispatchDeletePost(id);
+    props.deletePost(id);
   };
   const votePost = payload => {
-    props.dispatchCastVote(payload);
+    props.castVote(payload);
   };
 
   return (
@@ -38,12 +38,7 @@ const Post = props => {
     </li>
   );
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchDeletePost: id => dispatch(deletePost(id)),
-    dispatchCastVote: payload => dispatch(castVote(payload))
-  };
-};
+
 function mapStateToProps({ posts, loading }) {
   return {
     posts,
@@ -53,5 +48,5 @@ function mapStateToProps({ posts, loading }) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  postsActions
 )(Post);
