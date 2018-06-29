@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => {
     dispatchCastVote: payload => dispatch(castVote(payload))
   };
 };
-function mapStateToProps({ posts }, { loading }) {
+function mapStateToProps({ posts, loading }) {
   return {
     posts,
     loading

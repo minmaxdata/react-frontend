@@ -131,7 +131,7 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-function mapStateToProps({ posts }, { categories }) {
+function mapStateToProps({ posts, categories }) {
   return {
     posts,
     categories

@@ -44,9 +44,9 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-function mapStateToProps(state) {
+function mapStateToProps({ categories }) {
   return {
-    categories: state.categories
+    categories
   };
 }
 export default connect(
