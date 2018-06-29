@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as postActions from "./../actions/post";
-import * as postsActions from "./../actions/posts";
-import * as commentsActions from "./../actions/comments";
+import { getPostById } from "./../actions/post";
+import { castVote, deletePost } from "./../actions/posts";
+import { getCommentsByPostId } from "./../actions/comments";
 import Comments from "./Comments";
 import PostManager from "./PostManager";
 import PostBody from "./PostBody";
@@ -65,5 +65,5 @@ function mapStateToProps({ posts, post, loading, comments }) {
 
 export default connect(
   mapStateToProps,
-  { postActions, postsActions, commentsActions }
+  { getPostById, castVote, deletePost, getCommentsByPostId }
 )(PostDetail);

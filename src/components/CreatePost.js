@@ -30,14 +30,14 @@ class CreatePost extends Component {
 
     if (this.state.id) {
       let post = { ...values, id: this.state.id };
-      this.props.dispatchEditPost(post);
+      this.props.editPost(post);
     } else {
       let post = {
         ...values,
         id: uuid(),
         timestamp: Date.now()
       };
-      this.props.dispatchCreatePost(post);
+      this.props.createPost(post);
     }
     this.props.history.goBack();
   };
@@ -121,16 +121,6 @@ class CreatePost extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchCreatePost: post => {
-      dispatch(createPost(post));
-    },
-    dispatchEditPost: post => {
-      dispatch(editPost(post));
-    }
-  };
-};
 function mapStateToProps({ posts, categories }) {
   return {
     posts,
@@ -139,5 +129,5 @@ function mapStateToProps({ posts, categories }) {
 }
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { createPost, editPost }
 )(CreatePost);

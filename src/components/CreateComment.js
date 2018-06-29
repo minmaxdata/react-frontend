@@ -33,12 +33,12 @@ class CreateComment extends Component {
         deleted: false,
         parentDeleted: false
       };
-      this.props.dispatchCreateComment(comment);
+      this.props.createComment(comment);
     } else {
       let comment = { ...values, id: this.props.commentId };
-      this.props.dispatchEditComment(comment);
+      this.props.editComment(comment);
     }
-    this.props.dispatchGetPost(this.props.parentId);
+    this.props.getPostById(this.props.parentId);
     this.props.close();
   };
   handleChange = event => {
@@ -88,21 +88,7 @@ class CreateComment extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchCreateComment: comment => {
-      dispatch(createComment(comment));
-    },
-    dispatchEditComment: comment => {
-      dispatch(editComment(comment));
-    },
-    dispatchGetPost: id => {
-      dispatch(getPostById(id));
-    }
-  };
-};
-
 export default connect(
   null,
-  mapDispatchToProps
+  { createComment, editComment, getPostById }
 )(CreateComment);

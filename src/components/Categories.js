@@ -6,7 +6,7 @@ import Category from "./Category";
 
 class Categories extends Component {
   componentDidMount() {
-    this.props.dispatchGetCategories();
+    this.props.getCategories();
   }
 
   render() {
@@ -37,13 +37,7 @@ class Categories extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchGetCategories: () => {
-      dispatch(getCategories());
-    }
-  };
-};
+
 function mapStateToProps({ categories }) {
   return {
     categories
@@ -51,5 +45,5 @@ function mapStateToProps({ categories }) {
 }
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { getCategories }
 )(Categories);

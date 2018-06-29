@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Modal from "react-modal";
 import * as FontAwesome from "react-icons/lib/fa";
 import { castVote, deleteComment } from "./../actions/comments";
-import { getPostById } from "./../actions/post";
 import CreateComment from "./CreateComment";
 import Vote from "./Vote";
 
@@ -20,10 +19,10 @@ class Comment extends Component {
 
   deleteComment = () => {
     let id = this.props.comment.id;
-    this.props.dispatchDeleteComment(id);
+    this.props.deleteComment(id);
   };
   castVote = payload => {
-    this.props.dispatchCastVote(payload);
+    this.props.castVote(payload);
   };
 
   render() {
@@ -62,22 +61,7 @@ class Comment extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchDeleteComment: id => {
-      dispatch(deleteComment(id));
-    },
-    dispatchCastVote: payload => {
-      dispatch(castVote(payload));
-    },
-    dispatchGetPost: comment => {
-      dispatch(getPostById(comment));
-    }
-  };
-};
-
 export default connect(
   null,
-  mapDispatchToProps
+  { castVote, deleteComment }
 )(Comment);
