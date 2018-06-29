@@ -23,7 +23,6 @@ class Comment extends Component {
     this.props.dispatchDeleteComment(id);
   };
   castVote = payload => {
-    console.log("vote payload ", payload);
     this.props.dispatchCastVote(payload);
   };
 
