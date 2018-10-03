@@ -1,7 +1,7 @@
 import React from "react";
-import * as FontAwesome from "react-icons/lib/fa";
+import * as FontAwesome from "react-icons/fa";
 
-const Vote = ({itemId, onVote}) => {
+const Vote = ({ itemId, onVote }) => {
   const voteOnItem = async payload => {
 
     let params = { ...payload, id: itemId };

@@ -1,7 +1,7 @@
 import React from "react";
-import * as FontAwesome from "react-icons/lib/fa";
+import * as FontAwesome from "react-icons/fa";
 
-const DeleteItem = ({itemId, onDelete}) => {
+const DeleteItem = ({ itemId, onDelete }) => {
   const removeItem = itemId => {
     onDelete(itemId);
   };

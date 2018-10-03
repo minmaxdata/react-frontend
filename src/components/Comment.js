@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Modal from "react-modal";
-import * as FontAwesome from "react-icons/lib/fa";
+import * as FontAwesome from "react-icons/fa";
 import { castVote, deleteComment } from "./../actions/comments";
 import CreateComment from "./CreateComment";
 import Vote from "./Vote";
