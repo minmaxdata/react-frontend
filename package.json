@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "array-sort": "1.0.0",
-    "bootstrap": "4.6.2",
+    "bootstrap": "5.3.3",
     "form-serialize": "0.7.2",
     "normalize.css": "8.0.0",
     "react": "16.5.2",
